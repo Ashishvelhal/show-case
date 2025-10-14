@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>MERN Stack Application</h1>
+        <h1>MERN Stack Application og</h1>
         <p>{message || 'Connecting to the server...'}</p>
       </header>
     </div>
