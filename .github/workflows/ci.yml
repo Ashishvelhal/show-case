@@ -1,0 +1,63 @@
+name: MERN CI/CD
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-build:
+    name: Test and Build
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+    
+    # Server setup and test
+    - name: Server - Install dependencies
+      working-directory: ./server
+      run: npm ci
+      
+    - name: Server - Run linting
+      working-directory: ./server
+      run: npm run lint --if-present
+      
+    - name: Server - Run tests
+      working-directory: ./server
+      run: npm test -- --passWithNoTests
+    
+    # Client setup and test
+    - name: Client - Install dependencies
+      working-directory: ./client
+      run: npm ci
+      
+    - name: Client - Run linting
+      working-directory: ./client
+      run: npm run lint --if-present
+      
+    - name: Client - Run tests
+      working-directory: ./client
+      run: npm test -- --watchAll=false --passWithNoTests
+      
+    - name: Client - Build
+      working-directory: ./client
+      run: npm run build
+      
+      # Optional: Add deployment steps here
+      # - name: Deploy to production
+      #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      #   run: |
+      #     # Add your deployment commands here
+      #     echo "Deploying to production..."
