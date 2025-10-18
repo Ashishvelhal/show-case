@@ -36,6 +36,9 @@ const ProductCard = styled(Card)({
   flexDirection: 'column',
   height: '100%',
   width: '100%',
+  minHeight: '400px', // Consistent minimum height for all cards
+  maxWidth: '350px', // Consistent maximum width
+  margin: '0 auto', // Center cards horizontally
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   borderRadius: '12px',
   overflow: 'hidden',
@@ -47,7 +50,7 @@ const ProductCard = styled(Card)({
 });
 
 const ProductImage = styled(CardMedia)({
-  height: 250,
+  height: 200, // Fixed height for consistency
   width: '100%',
   position: 'relative',
   '&::after': {
@@ -120,9 +123,18 @@ const FeaturedProducts = () => {
         <SectionTitle variant="h3" component="h2">
           Featured Creations
         </SectionTitle>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'stretch' // Ensures all cards have same height
+        }}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} key={product.id} sx={{ display: 'flex' }}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{
+              display: 'flex',
+              minWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)', lg: 'calc(25% - 24px)' },
+              maxWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)', lg: 'calc(25% - 24px)' }
+            }}>
               <ProductCard>
                 <ProductImage
                   component="img"

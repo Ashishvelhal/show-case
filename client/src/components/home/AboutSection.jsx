@@ -102,8 +102,22 @@ const AboutSection = () => {
   return (
     <Section>
       <Container maxWidth="lg">
-        <Grid container spacing={6} alignItems="center">
-          <Grid item xs={12} md={6}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: 'center',
+          gap: 6,
+          '@media (max-width: 900px)': {
+            flexDirection: 'column',
+            textAlign: 'center'
+          }
+        }}>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            flex: { xs: '1', md: '1' }
+          }}>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -162,8 +176,13 @@ const AboutSection = () => {
                 Learn More About Us
               </Button>
             </motion.div>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: { xs: '1', md: '1' }
+          }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -197,8 +216,8 @@ const AboutSection = () => {
                 />
               </Box>
             </motion.div>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
 
         <Box sx={{ mt: 10 }}>
           <Typography
@@ -224,14 +243,30 @@ const AboutSection = () => {
           >
             Why Choose Our Resin Art
           </Typography>
-          <Grid container spacing={4}>
+          <Box sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+            gap: 4,
+            '@media (max-width: 600px)': {
+              flexDirection: 'column',
+              alignItems: 'center'
+            }
+          }}>
             {features.map((feature, index) => (
-              <Grid item xs={12} md={4} key={index}>
+              <Box key={index} sx={{
+                display: 'flex',
+                flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 16px)', md: '1 1 calc(33.333% - 21px)' },
+                minWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)' },
+                maxWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)' }
+              }}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  style={{ width: '100%', display: 'flex' }}
                 >
                   <FeatureItem>
                     <Typography variant="h2" sx={{ fontSize: '3rem', mb: 2 }}>
@@ -245,9 +280,9 @@ const AboutSection = () => {
                     </Typography>
                   </FeatureItem>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
       </Container>
     </Section>

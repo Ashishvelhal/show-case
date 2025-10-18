@@ -87,14 +87,30 @@ const Testimonials = () => {
           What Our Customers Say
         </Typography>
 
-        <Grid container spacing={4}>
+        <Box sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          gap: 4,
+          '@media (max-width: 600px)': {
+            flexDirection: 'column',
+            alignItems: 'center'
+          }
+        }}>
           {testimonials.map((testimonial, index) => (
-            <Grid item xs={12} md={4} key={testimonial.id}>
+            <Box key={testimonial.id} sx={{
+              display: 'flex',
+              flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 16px)', md: '1 1 calc(33.333% - 21px)' },
+              minWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)' },
+              maxWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)' }
+            }}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                style={{ width: '100%', display: 'flex' }}
               >
                 <TestimonialCard>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
@@ -130,9 +146,9 @@ const Testimonials = () => {
                   </Box>
                 </TestimonialCard>
               </motion.div>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Section>
   );
