@@ -131,6 +131,7 @@ const AboutSection = () => {
                   mb: 3,
                   color: 'rgb(var(--text-primary))',
                   position: 'relative',
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
                   transition: 'color 0.3s ease',
                   '&::after': {
                     content: '""',
@@ -146,12 +147,26 @@ const AboutSection = () => {
               >
                 Our Story
               </Typography>
-              <Typography variant="body1" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem', lineHeight: 1.8, mb: 3, transition: 'color 0.3s ease' }}>
+              <Typography variant="body1" sx={{
+                color: 'rgb(var(--text-secondary))',
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                mb: 3,
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+                transition: 'color 0.3s ease'
+              }}>
                 Welcome to our world of resin art, where creativity meets craftsmanship.
                 What started as a passion project has blossomed into a thriving business
                 dedicated to creating stunning, one-of-a-kind resin pieces.
               </Typography>
-              <Typography variant="body1" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem', lineHeight: 1.8, mb: 4, transition: 'color 0.3s ease' }}>
+              <Typography variant="body1" sx={{
+                color: 'rgb(var(--text-secondary))',
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                mb: 4,
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+                transition: 'color 0.3s ease'
+              }}>
                 Our mission is to bring beauty and uniqueness into your space with our
                 handcrafted resin art. Each piece is made with love and attention to detail,
                 ensuring you receive a work of art that tells its own story.
@@ -228,6 +243,7 @@ const AboutSection = () => {
               mb: 6,
               color: 'rgb(var(--text-primary))',
               position: 'relative',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
               transition: 'color 0.3s ease',
               '&::after': {
                 content: '""',
@@ -272,10 +288,18 @@ const AboutSection = () => {
                     <Typography variant="h2" sx={{ fontSize: '3rem', mb: 2 }}>
                       {feature.icon}
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: 'rgb(var(--text-primary))' }}>
+                    <Typography variant="h6" sx={{
+                      fontWeight: 700,
+                      mb: 1,
+                      color: 'rgb(var(--text-primary))',
+                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                    }}>
                       {feature.title}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))' }}>
+                    <Typography variant="body2" sx={{
+                      color: 'rgb(var(--text-secondary))',
+                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                    }}>
                       {feature.description}
                     </Typography>
                   </FeatureItem>

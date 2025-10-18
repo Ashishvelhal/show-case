@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
-import Navbar from './Component/Navbar';
-import Footer from './Component/Footer';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { ThemeProvider as DaisyThemeProvider, useTheme } from './contexts/ThemeContext';
 
 // Material-UI theme creator based on Daisy UI theme

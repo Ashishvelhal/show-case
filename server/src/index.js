@@ -7,10 +7,11 @@ import { connectDB } from "./lib/db.js";
 
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
+import inquiryRoutes from "./routes/inquiry.route.js"
 
 dotenv.config()
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -23,6 +24,7 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoutes);
+app.use("/api/inquiries", inquiryRoutes);
 
 
 app.listen(PORT, () =>{ 

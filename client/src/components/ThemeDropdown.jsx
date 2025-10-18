@@ -119,7 +119,9 @@ const ThemeDropdown = () => {
                 }}
               />
             </ListItemIcon>
-            <ListItemText primary={theme.name} />
+            <ListItemText primary={theme.name} primaryTypographyProps={{
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+            }} />
           </MenuItem>
         ))}
       </Menu>

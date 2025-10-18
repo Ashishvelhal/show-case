@@ -3,7 +3,15 @@ import User  from "../models/user.model.js";
 
 export const protectRoute = async (req,res,next) => {
     try {
-        const token = req.cookies.jwt
+        let token = req.cookies.jwt;
+
+        if (!token) {
+            // Check Authorization header as fallback
+            const authHeader = req.headers.authorization;
+            if (authHeader && authHeader.startsWith('Bearer ')) {
+                token = authHeader.substring(7); // Remove 'Bearer ' prefix
+            }
+        }
 
         if(!token){
             return res.status(401).json({message:"Unauthorized - NO token Provided"});

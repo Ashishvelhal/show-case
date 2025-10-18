@@ -34,26 +34,31 @@ const HeroContent = styled(Box)({
   zIndex: 1,
 });
 
-const HeroTitle = styled(Typography)({
-  background: 'linear-gradient(90deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
+const HeroTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 900,
+  marginBottom: theme.spacing(2),
+  background: 'linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  fontWeight: 800,
-  letterSpacing: '-0.02em',
+  backgroundClip: 'text',
+  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
   lineHeight: 1.2,
-  marginBottom: '1.5rem',
-  textShadow: '0 2px 10px rgba(var(--primary), 0.1)',
-  transition: 'background 0.3s ease',
-});
+  textAlign: 'center',
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+  textShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+}));
 
-const HeroSubtitle = styled(Typography)({
-  color: 'rgb(var(--text-secondary))',
+const HeroSubtitle = styled(Typography)(({ theme }) => ({
   fontSize: '1.25rem',
-  maxWidth: '700px',
-  margin: '0 auto 2.5rem',
-  lineHeight: 1.7,
-  transition: 'color 0.3s ease',
-});
+  marginBottom: theme.spacing(4),
+  color: 'rgb(var(--text-secondary))',
+  textAlign: 'center',
+  maxWidth: '600px',
+  margin: '0 auto 2rem auto',
+  lineHeight: 1.6,
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+  fontWeight: 400,
+}));
 
 const CTAButton = styled(Button)({
   background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',

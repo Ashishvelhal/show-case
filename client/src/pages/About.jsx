@@ -37,11 +37,12 @@ const About = () => {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 transition: 'background 0.3s ease',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
               }}
             >
               About Us
             </Typography>
-            <Typography variant="h6" sx={{ color: 'rgb(var(--text-secondary))', maxWidth: '700px', mx: 'auto', transition: 'color 0.3s ease' }}>
+            <Typography variant="h6" sx={{ color: 'rgb(var(--text-secondary))', maxWidth: '700px', mx: 'auto', transition: 'color 0.3s ease', fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
               We are a team of passionate developers and designers creating amazing web experiences.
             </Typography>
           </Box>
@@ -49,30 +50,30 @@ const About = () => {
           <Grid container spacing={4}>
             <Grid item xs={12} md={4}>
               <AboutCard>
-                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold">
+                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   Our Mission
                 </Typography>
-                <Typography sx={{ color: 'rgb(var(--text-secondary))' }}>
+                <Typography sx={{ color: 'rgb(var(--text-secondary))', fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   To deliver innovative and high-quality web solutions that help businesses grow and succeed in the digital world.
                 </Typography>
               </AboutCard>
             </Grid>
             <Grid item xs={12} md={4}>
               <AboutCard>
-                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold">
+                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   Our Vision
                 </Typography>
-                <Typography sx={{ color: 'rgb(var(--text-secondary))' }}>
+                <Typography sx={{ color: 'rgb(var(--text-secondary))', fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   To be a leading force in web development, known for our creativity, technical excellence, and client satisfaction.
                 </Typography>
               </AboutCard>
             </Grid>
             <Grid item xs={12} md={4}>
               <AboutCard>
-                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold">
+                <Typography variant="h5" color="primary" gutterBottom fontWeight="bold" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   Our Values
                 </Typography>
-                <Typography sx={{ color: 'rgb(var(--text-secondary))' }}>
+                <Typography sx={{ color: 'rgb(var(--text-secondary))', fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   We value innovation, quality, transparency, and building lasting relationships with our clients.
                 </Typography>
               </AboutCard>

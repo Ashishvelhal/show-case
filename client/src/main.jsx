@@ -6,6 +6,12 @@ import App from './App';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
+import Settings from './pages/Settings';
+import Inquiry from './pages/Inquiry';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -17,6 +23,13 @@ root.render(
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+          <Route index element={<div>Welcome to the Admin Dashboard! Select an option from the sidebar.</div>} />
+          <Route path="users" element={<Users />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="inquiry" element={<Inquiry />} />
         </Route>
       </Routes>
     </BrowserRouter>

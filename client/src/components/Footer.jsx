@@ -29,12 +29,17 @@ const Footer = () => {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
-                fontSize: { xs: '1.25rem', sm: '1.5rem' }
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}
             >
               NEON SHOWCASE
             </Typography>
-            <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', mb: 2 }}>
+            <Typography variant="body2" sx={{
+              color: 'rgb(var(--text-secondary))',
+              mb: 2,
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+            }}>
               Creating beautiful resin art pieces that bring life to your space.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
@@ -81,7 +86,12 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: 'rgb(var(--text-primary))' }}>
+            <Typography variant="subtitle1" sx={{
+              fontWeight: 600,
+              mb: 2,
+              color: 'rgb(var(--text-primary))',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+            }}>
               Quick Links
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -93,7 +103,8 @@ const Footer = () => {
                   textDecoration: 'none',
                   '&:hover': { color: 'rgb(var(--primary))' },
                   transition: 'color 0.2s ease',
-                  fontSize: '0.9rem'
+                  fontSize: '0.9rem',
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Home
@@ -103,19 +114,32 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: 'rgb(var(--text-primary))' }}>
+            <Typography variant="subtitle1" sx={{
+              fontWeight: 600,
+              mb: 2,
+              color: 'rgb(var(--text-primary))',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+            }}>
               Contact Us
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Email sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem' }} />
-                <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.9rem' }}>
+                <Typography variant="body2" sx={{
+                  color: 'rgb(var(--text-secondary))',
+                  fontSize: '0.9rem',
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                }}>
                   info@neonshowcase.com
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Phone sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem' }} />
-                <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.9rem' }}>
+                <Typography variant="body2" sx={{
+                  color: 'rgb(var(--text-secondary))',
+                  fontSize: '0.9rem',
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                }}>
                   +1 (555) 123-4567
                 </Typography>
               </Box>
@@ -129,7 +153,11 @@ const Footer = () => {
           borderTop: '1px solid rgba(var(--border-color), 0.3)',
           textAlign: 'center'
         }}>
-          <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.85rem' }}>
+          <Typography variant="body2" sx={{
+            color: 'rgb(var(--text-secondary))',
+            fontSize: '0.85rem',
+            fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+          }}>
             © {new Date().getFullYear()} Neon Showcase. All rights reserved.
           </Typography>
         </Box>

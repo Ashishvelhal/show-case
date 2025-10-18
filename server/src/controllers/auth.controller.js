@@ -3,38 +3,51 @@ import User from "../models/user.model.js";
 import bcrypt  from "bcryptjs"
 import cloudinary from "../lib/cloudinary.js";
 export const signup = async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, adminSecret } = req.body;
+    console.log('Signup request:', { fullName, email, password, adminSecret }); // Debug log
     try {
         if( !fullName || !email || !password) {
+            console.log('Validation failed: Missing fields');
             return res.status(400).json ({ message: "Please fill all fields" });
         }
 
         if (password.length < 6){
+            console.log('Validation failed: Password too short');
             return res.status(400).json({ message: "Password must be at least 6 characters"});
         }
 
         const user = await User.findOne({ email });
+        console.log('Existing user check:', user ? 'Found' : 'Not found');
 
-        if (user) return res.status(400).json({ message: "Email already exists" });
+        if (user) {
+            console.log('Validation failed: Email exists');
+            return res.status(400).json({ message: "Email already exists" });
+        }
 
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
+
+        const isAdmin = adminSecret === process.env.ADMIN_SECRET;
+        console.log('Is admin:', isAdmin);
 
         const newUser = new User({
             fullName,
             email,
             password: hashedPassword,
+            isAdmin,
         })
 
         if(newUser){
             generateToken(newUser._id,res)
             await newUser.save();
+            console.log('User created successfully');
 
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
+                isAdmin: newUser.isAdmin,
             });
         }else{
         res.status(400).json({ message: "Invalid user data" });
@@ -66,6 +79,8 @@ export const login = async (req, res) => {
             fullName: user.fullName,
             email: user.email,
             profilePic: user.profilePic,
+            isAdmin: user.isAdmin,
+            token: generateToken(user._id,res), // Return the token
         })
     } catch (error) {
         console.log("Error in login controller", error.message);
@@ -78,7 +93,7 @@ export const logout = (req, res) => {
         res.cookie("jwt","", {maxAge: 0 });
         res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
-        console.log(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Internal server error" });
     }
 };
 

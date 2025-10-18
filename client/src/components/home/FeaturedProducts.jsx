@@ -18,6 +18,7 @@ const SectionTitle = styled(Typography)({
   fontWeight: 700,
   color: 'rgb(var(--text-primary))',
   position: 'relative',
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
   transition: 'color 0.3s ease',
   '&::after': {
     content: '""',
@@ -144,10 +145,18 @@ const FeaturedProducts = () => {
                 />
                 <ProductContent>
                   <Box sx={{ mb: 2, flexGrow: 1 }}>
-                    <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 1, color: 'rgb(var(--text-primary))' }}>
+                    <Typography variant="h6" component="h3" sx={{
+                      fontWeight: 600,
+                      mb: 1,
+                      color: 'rgb(var(--text-primary))',
+                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                    }}>
                       {product.name}
                     </Typography>
-                    <Typography variant="h6" color="primary" sx={{ fontWeight: 700 }}>
+                    <Typography variant="h6" sx={{
+                      fontWeight: 700,
+                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                    }}>
                       {product.price}
                     </Typography>
                   </Box>

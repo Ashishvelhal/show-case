@@ -18,7 +18,7 @@ import { styled } from '@mui/material/styles';
 import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import ThemeDropdown from '../components/ThemeDropdown';
+import ThemeDropdown from './ThemeDropdown';
 
 const NeonButton = styled(Button)(({ theme, active }) => ({
   color: active ? 'var(--primary)' : 'var(--text-secondary)',
@@ -101,7 +101,8 @@ const Navbar = () => {
             background: 'linear-gradient(90deg, #0af, #a0f)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
           }}
         >
           NEON SHOWCASE
@@ -176,6 +177,7 @@ const Navbar = () => {
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
                 fontSize: { xs: '1.5rem', sm: '1.75rem' },
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
                 '&:hover': {
                   opacity: 0.9,
                 },

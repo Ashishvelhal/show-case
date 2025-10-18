@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Email, Phone, LocationOn, Send } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 
 const ContactSection = styled(Box)({
   padding: '6rem 0',
@@ -42,12 +43,39 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch('http://localhost:3001/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        await Swal.fire({
+          title: 'Success!',
+          text: 'Your inquiry has been submitted successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        await Swal.fire({
+          title: 'Error',
+          text: data.message || 'Failed to submit inquiry.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    } catch (error) {
+      await Swal.fire({
+        title: 'Error',
+        text: 'Network error. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   };
 
   return (
@@ -63,11 +91,12 @@ const Contact = () => {
               background: 'linear-gradient(90deg, #0af, #a0f)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
             }}
           >
             Contact Us
           </Typography>
-          <Typography variant="h6" color="textSecondary">
+          <Typography variant="h6" color="textSecondary" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
             Have questions? We'd love to hear from you.
           </Typography>
         </Box>
@@ -143,10 +172,10 @@ const Contact = () => {
           <Grid item xs={12} md={6}>
             <ContactCard sx={{ backgroundColor: '#f8f9fa' }}>
               <Box mb={4}>
-                <Typography variant="h5" fontWeight="bold" mb={3}>
+                <Typography variant="h5" fontWeight="bold" mb={3} sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   Get in Touch
                 </Typography>
-                <Typography color="textSecondary" mb={4}>
+                <Typography color="textSecondary" mb={4} sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>
                   Have a project in mind or want to make an inquiry? Feel free to reach out to us.
                 </Typography>
               </Box>
@@ -154,24 +183,24 @@ const Contact = () => {
               <Box mb={3} display="flex" alignItems="center">
                 <Email color="primary" sx={{ mr: 2, fontSize: '2rem' }} />
                 <Box>
-                  <Typography variant="subtitle2" color="textSecondary">Email</Typography>
-                  <Typography>contact@neonshowcase.com</Typography>
+                  <Typography variant="subtitle2" color="textSecondary" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>Email</Typography>
+                  <Typography sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>contact@neonshowcase.com</Typography>
                 </Box>
               </Box>
               
               <Box mb={3} display="flex" alignItems="center">
                 <Phone color="primary" sx={{ mr: 2, fontSize: '2rem' }} />
                 <Box>
-                  <Typography variant="subtitle2" color="textSecondary">Phone</Typography>
-                  <Typography>+1 (555) 123-4567</Typography>
+                  <Typography variant="subtitle2" color="textSecondary" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>Phone</Typography>
+                  <Typography sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>+1 (555) 123-4567</Typography>
                 </Box>
               </Box>
               
               <Box display="flex" alignItems="flex-start">
                 <LocationOn color="primary" sx={{ mr: 2, mt: 0.5, fontSize: '2rem' }} />
                 <Box>
-                  <Typography variant="subtitle2" color="textSecondary">Location</Typography>
-                  <Typography>123 Neon Street<br />Tech City, TC 12345<br />United States</Typography>
+                  <Typography variant="subtitle2" color="textSecondary" sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>Location</Typography>
+                  <Typography sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>123 Neon Street<br />Tech City, TC 12345<br />United States</Typography>
                 </Box>
               </Box>
             </ContactCard>
