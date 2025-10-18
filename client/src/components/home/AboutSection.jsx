@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(10, 0),
-  backgroundColor: '#f8f9ff',
+  backgroundColor: 'rgb(var(--base-200))',
   position: 'relative',
   overflow: 'hidden',
+  transition: 'background-color 0.3s ease',
 }));
 
 const StyledAvatar = styled(Avatar)({
@@ -21,11 +22,11 @@ const StyledAvatar = styled(Avatar)({
 const FeatureItem = styled(Box)({
   textAlign: 'center',
   padding: '2rem',
-  backgroundColor: 'white',
+  backgroundColor: 'rgb(var(--base-100))',
   borderRadius: '12px',
-  boxShadow: '0 5px 20px rgba(0, 0, 0, 0.05)',
+  boxShadow: '0 5px 20px rgba(var(--primary), 0.05)',
   height: '100%',
-  transition: 'transform 0.3s ease',
+  transition: 'transform 0.3s ease, background-color 0.3s ease',
   '&:hover': {
     transform: 'translateY(-10px)',
   },
@@ -47,6 +48,54 @@ const features = [
     title: 'Eco-Friendly',
     description: 'We use non-toxic, environmentally responsible materials in all our creations.',
   },
+  {
+    icon: '💎',
+    title: 'Premium Quality',
+    description: 'Only the finest resins and materials are used to ensure longevity and beauty.',
+  },
+  {
+    icon: '🎯',
+    title: 'Custom Orders',
+    description: 'Personalized designs tailored to your specific vision and space requirements.',
+  },
+  {
+    icon: '🏆',
+    title: 'Award Winning',
+    description: 'Recognized by art communities for innovative techniques and stunning results.',
+  },
+];
+
+const additionalFeatures = [
+  {
+    icon: '🔒',
+    title: 'Durability',
+    description: 'UV-resistant coatings ensure your pieces remain vibrant for years to come.',
+  },
+  {
+    icon: '🚚',
+    title: 'Fast Shipping',
+    description: 'Carefully packaged and shipped worldwide with tracking and insurance.',
+  },
+  {
+    icon: '💰',
+    title: 'Best Value',
+    description: 'Competitive pricing for premium, handcrafted art that appreciates in value.',
+  },
+  {
+    icon: '🎨',
+    title: 'Color Variety',
+    description: 'Endless color combinations and effects from subtle pastels to bold statements.',
+  },
+  {
+    icon: '📏',
+    title: 'Size Options',
+    description: 'From small coasters to large wall installations - we create pieces in any size.',
+  },
+  {
+    icon: '✨',
+    title: 'Special Effects',
+    description: 'Metallic finishes, glow-in-the-dark elements, and 3D depth effects available.',
+  },
 ];
 
 const AboutSection = () => {
@@ -66,36 +115,38 @@ const AboutSection = () => {
                 sx={{
                   fontWeight: 700,
                   mb: 3,
-                  color: '#2d3748',
+                  color: 'rgb(var(--text-primary))',
                   position: 'relative',
+                  transition: 'color 0.3s ease',
                   '&::after': {
                     content: '""',
                     display: 'block',
                     width: '60px',
                     height: '4px',
-                    background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
+                    background: 'linear-gradient(90deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
                     marginTop: '1rem',
                     borderRadius: '2px',
+                    transition: 'background 0.3s ease',
                   },
                 }}
               >
                 Our Story
               </Typography>
-              <Typography variant="body1" color="textSecondary" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.8, mb: 3 }}>
-                Welcome to our world of resin art, where creativity meets craftsmanship. 
-                What started as a passion project has blossomed into a thriving business 
+              <Typography variant="body1" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem', lineHeight: 1.8, mb: 3, transition: 'color 0.3s ease' }}>
+                Welcome to our world of resin art, where creativity meets craftsmanship.
+                What started as a passion project has blossomed into a thriving business
                 dedicated to creating stunning, one-of-a-kind resin pieces.
               </Typography>
-              <Typography variant="body1" color="textSecondary" paragraph sx={{ fontSize: '1.1rem', lineHeight: 1.8, mb: 4 }}>
-                Our mission is to bring beauty and uniqueness into your space with our 
-                handcrafted resin art. Each piece is made with love and attention to detail, 
+              <Typography variant="body1" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem', lineHeight: 1.8, mb: 4, transition: 'color 0.3s ease' }}>
+                Our mission is to bring beauty and uniqueness into your space with our
+                handcrafted resin art. Each piece is made with love and attention to detail,
                 ensuring you receive a work of art that tells its own story.
               </Typography>
-              <Button 
-                variant="contained" 
+              <Button
+                variant="contained"
                 size="large"
                 sx={{
-                  background: 'linear-gradient(45deg, #6a11cb 0%, #2575fc 100%)',
+                  background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
                   color: 'white',
                   px: 4,
                   py: 1.5,
@@ -103,7 +154,7 @@ const AboutSection = () => {
                   fontWeight: 600,
                   '&:hover': {
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 5px 15px rgba(37, 117, 252, 0.4)',
+                    boxShadow: '0 5px 15px rgba(var(--primary), 0.4)',
                   },
                   transition: 'all 0.3s ease',
                 }}
@@ -140,9 +191,9 @@ const AboutSection = () => {
                   },
                 }}
               >
-                <img 
-                  src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                  alt="Resin Art Creation Process" 
+                <img
+                  src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                  alt="Resin Art Creation Process"
                 />
               </Box>
             </motion.div>
@@ -150,22 +201,24 @@ const AboutSection = () => {
         </Grid>
 
         <Box sx={{ mt: 10 }}>
-          <Typography 
-            variant="h4" 
-            align="center" 
-            sx={{ 
-              fontWeight: 700, 
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{
+              fontWeight: 700,
               mb: 6,
-              color: '#2d3748',
+              color: 'rgb(var(--text-primary))',
               position: 'relative',
+              transition: 'color 0.3s ease',
               '&::after': {
                 content: '""',
                 display: 'block',
                 width: '60px',
                 height: '4px',
-                background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
+                background: 'linear-gradient(90deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
                 margin: '1rem auto 0',
                 borderRadius: '2px',
+                transition: 'background 0.3s ease',
               },
             }}
           >
@@ -184,10 +237,10 @@ const AboutSection = () => {
                     <Typography variant="h2" sx={{ fontSize: '3rem', mb: 2 }}>
                       {feature.icon}
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: 'rgb(var(--text-primary))' }}>
                       {feature.title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))' }}>
                       {feature.description}
                     </Typography>
                   </FeatureItem>

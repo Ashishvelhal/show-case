@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import ProductDetail from './ProductDetail';
+import img1 from '../../assets/2.jpg';
+import img2 from '../../assets/3.jpg';
+import img3 from '../../assets/4.jpg';
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 0),
-  backgroundColor: '#fff',
+  backgroundColor: 'rgb(var(--base-100))',
+  transition: 'background-color 0.3s ease',
 }));
 
 const SectionTitle = styled(Typography)({
   textAlign: 'center',
   marginBottom: '3rem',
   fontWeight: 700,
-  color: '#2d3748',
+  color: 'rgb(var(--text-primary))',
   position: 'relative',
+  transition: 'color 0.3s ease',
   '&::after': {
     content: '""',
     display: 'block',
     width: '80px',
     height: '4px',
-    background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
+    background: 'linear-gradient(90deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
     margin: '1rem auto 0',
     borderRadius: '2px',
+    transition: 'background 0.3s ease',
   },
 });
 
@@ -32,9 +39,10 @@ const ProductCard = styled(Card)({
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   borderRadius: '12px',
   overflow: 'hidden',
+  backgroundColor: 'rgb(var(--base-100))',
   '&:hover': {
     transform: 'translateY(-8px)',
-    boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 15px 30px rgba(var(--primary), 0.1)',
   },
 });
 
@@ -64,6 +72,7 @@ const ProductContent = styled(CardContent)({
   flexGrow: 1,
   padding: '1.5rem',
   minHeight: '180px',
+  backgroundColor: 'rgb(var(--base-100))',
   '& > *:last-child': {
     marginTop: 'auto',
   },
@@ -74,23 +83,37 @@ const products = [
     id: 1,
     name: 'Ocean Wave Resin Art',
     price: '$149',
-    image: 'https://images.unsplash.com/photo-1629196916689-19c6a4c5b1c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    image: img1,
   },
   {
     id: 2,
     name: 'Geode Resin Coaster Set',
     price: '$89',
-    image: 'https://images.unsplash.com/photo-1633613286848-e6b1caf7f7c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    image: img2,
   },
   {
     id: 3,
     name: 'Galaxy Resin Tray',
     price: '$129',
-    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+    image: img3,
   },
 ];
 
 const FeaturedProducts = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleViewDetails = (product) => {
+    setSelectedProduct(product);
+    // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedProduct(null);
+    // Re-enable scrolling when modal is closed
+    document.body.style.overflow = 'unset';
+  };
+
   return (
     <Section>
       <Container maxWidth="lg">
@@ -109,23 +132,25 @@ const FeaturedProducts = () => {
                 />
                 <ProductContent>
                   <Box sx={{ mb: 2, flexGrow: 1 }}>
-                    <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 1 }}>
+                    <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 1, color: 'rgb(var(--text-primary))' }}>
                       {product.name}
                     </Typography>
                     <Typography variant="h6" color="primary" sx={{ fontWeight: 700 }}>
                       {product.price}
                     </Typography>
                   </Box>
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     fullWidth
+                    onClick={() => handleViewDetails(product)}
                     sx={{
-                      color: '#6a11cb',
-                      borderColor: '#6a11cb',
+                      color: 'rgb(var(--primary))',
+                      borderColor: 'rgb(var(--primary))',
                       '&:hover': {
-                        backgroundColor: 'rgba(106, 17, 203, 0.05)',
-                        borderColor: '#6a11cb',
+                        backgroundColor: 'rgba(var(--primary), 0.05)',
+                        borderColor: 'rgb(var(--primary))',
                       },
+                      transition: 'all 0.3s ease',
                     }}
                   >
                     View Details
@@ -135,12 +160,13 @@ const FeaturedProducts = () => {
             </Grid>
           ))}
         </Grid>
+
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             size="large"
             sx={{
-              background: 'linear-gradient(45deg, #6a11cb 0%, #2575fc 100%)',
+              background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
               color: 'white',
               px: 4,
               py: 1.5,
@@ -148,7 +174,7 @@ const FeaturedProducts = () => {
               fontWeight: 600,
               '&:hover': {
                 transform: 'translateY(-2px)',
-                boxShadow: '0 5px 15px rgba(37, 117, 252, 0.4)',
+                boxShadow: '0 5px 15px rgba(var(--primary), 0.4)',
               },
               transition: 'all 0.3s ease',
             }}
@@ -157,6 +183,14 @@ const FeaturedProducts = () => {
           </Button>
         </Box>
       </Container>
+
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={handleCloseDetails}
+        />
+      )}
     </Section>
   );
 };

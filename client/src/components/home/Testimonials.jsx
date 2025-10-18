@@ -6,25 +6,27 @@ import { motion } from 'framer-motion';
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(10, 0),
-  backgroundColor: '#fff',
+  backgroundColor: 'rgb(var(--base-100))',
   position: 'relative',
   overflow: 'hidden',
+  transition: 'background-color 0.3s ease',
 }));
 
 const TestimonialCard = styled(Box)({
-  backgroundColor: '#fff',
+  backgroundColor: 'rgb(var(--base-100))',
   borderRadius: '12px',
   padding: '2.5rem',
-  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
+  boxShadow: '0 10px 30px rgba(var(--primary), 0.05)',
   height: '100%',
   position: 'relative',
+  transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
   '&::before': {
     content: '"\\201C"',
     position: 'absolute',
     top: '1.5rem',
     left: '2rem',
     fontSize: '5rem',
-    color: 'rgba(106, 17, 203, 0.1)',
+    color: 'rgba(var(--primary), 0.1)',
     fontFamily: 'Georgia, serif',
     lineHeight: 1,
   },
@@ -61,28 +63,30 @@ const Testimonials = () => {
   return (
     <Section>
       <Container maxWidth="lg">
-        <Typography 
-          variant="h3" 
-          align="center" 
-          sx={{ 
-            fontWeight: 700, 
+        <Typography
+          variant="h3"
+          align="center"
+          sx={{
+            fontWeight: 700,
             mb: 6,
-            color: '#2d3748',
+            color: 'rgb(var(--text-primary))',
             position: 'relative',
+            transition: 'color 0.3s ease',
             '&::after': {
               content: '""',
               display: 'block',
               width: '60px',
               height: '4px',
-              background: 'linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)',
+              background: 'linear-gradient(90deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
               margin: '1rem auto 0',
               borderRadius: '2px',
+              transition: 'background 0.3s ease',
             },
           }}
         >
           What Our Customers Say
         </Typography>
-        
+
         <Grid container spacing={4}>
           {testimonials.map((testimonial, index) => (
             <Grid item xs={12} md={4} key={testimonial.id}>
@@ -95,30 +99,31 @@ const Testimonials = () => {
                 <TestimonialCard>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                     {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        sx={{ 
-                          color: i < testimonial.rating ? '#f59e0b' : '#e2e8f0',
+                      <Star
+                        key={i}
+                        sx={{
+                          color: i < testimonial.rating ? 'rgb(var(--warning))' : 'rgb(var(--base-300))',
                           fontSize: '1.2rem',
-                          mr: 0.5
-                        }} 
+                          mr: 0.5,
+                          transition: 'color 0.3s ease',
+                        }}
                       />
                     ))}
                   </Box>
-                  <Typography variant="body1" color="textSecondary" sx={{ mb: 3, fontStyle: 'italic', lineHeight: 1.8 }}>
+                  <Typography variant="body1" sx={{ color: 'rgb(var(--text-secondary))', mb: 3, fontStyle: 'italic', lineHeight: 1.8, transition: 'color 0.3s ease' }}>
                     {testimonial.content}
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar 
-                      src={testimonial.avatar} 
+                    <Avatar
+                      src={testimonial.avatar}
                       alt={testimonial.name}
                       sx={{ width: 56, height: 56, mr: 2 }}
                     />
                     <Box>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#2d3748' }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'rgb(var(--text-primary))' }}>
                         {testimonial.name}
                       </Typography>
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))' }}>
                         {testimonial.role}
                       </Typography>
                     </Box>

@@ -7,24 +7,25 @@ const Footer = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box 
-      component="footer" 
+    <Box
+      component="footer"
       sx={{
         py: { xs: 3, sm: 4 },
         mt: 'auto',
-        background: '#f8f9fa',
-        borderTop: '1px solid #e9ecef',
-        boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)'
+        backgroundColor: 'rgb(var(--base-200))',
+        borderTop: '1px solid rgb(var(--border-color))',
+        boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.05)',
+        transition: 'background-color 0.3s ease, border-color 0.3s ease'
       }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12} md={4} sx={{ mb: { xs: 2, md: 0 } }}>
-            <Typography 
-              variant="h6" 
-              sx={{ 
+            <Typography
+              variant="h6"
+              sx={{
                 mb: 2,
-                background: 'linear-gradient(90deg, #0af, #a0f)',
+                background: 'linear-gradient(90deg, rgb(var(--primary)), rgb(var(--secondary)))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
@@ -33,45 +34,45 @@ const Footer = () => {
             >
               NEON SHOWCASE
             </Typography>
-            <Typography variant="body2" sx={{ color: '#6c757d', mb: 2 }}>
+            <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', mb: 2 }}>
               Creating beautiful resin art pieces that bring life to your space.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
-              <IconButton 
+              <IconButton
                 size={isMobile ? 'small' : 'medium'}
-                sx={{ 
-                  color: '#6c757d',
-                  '&:hover': { 
-                    color: '#0af',
+                sx={{
+                  color: 'rgb(var(--text-secondary))',
+                  '&:hover': {
+                    color: 'rgb(var(--primary))',
                     transform: 'translateY(-2px)',
-                    backgroundColor: 'rgba(0, 170, 255, 0.1)'
-                  } 
+                    backgroundColor: 'rgba(var(--primary), 0.1)'
+                  }
                 }}
               >
                 <Facebook fontSize={isMobile ? 'small' : 'medium'} />
               </IconButton>
-              <IconButton 
+              <IconButton
                 size={isMobile ? 'small' : 'medium'}
-                sx={{ 
-                  color: '#6c757d',
-                  '&:hover': { 
+                sx={{
+                  color: 'rgb(var(--text-secondary))',
+                  '&:hover': {
                     color: '#1DA1F2',
                     transform: 'translateY(-2px)',
                     backgroundColor: 'rgba(29, 161, 242, 0.1)'
-                  } 
+                  }
                 }}
               >
                 <Twitter fontSize={isMobile ? 'small' : 'medium'} />
               </IconButton>
-              <IconButton 
+              <IconButton
                 size={isMobile ? 'small' : 'medium'}
-                sx={{ 
-                  color: '#6c757d',
-                  '&:hover': { 
+                sx={{
+                  color: 'rgb(var(--text-secondary))',
+                  '&:hover': {
                     color: '#E1306C',
                     transform: 'translateY(-2px)',
                     backgroundColor: 'rgba(225, 48, 108, 0.1)'
-                  } 
+                  }
                 }}
               >
                 <Instagram fontSize={isMobile ? 'small' : 'medium'} />
@@ -80,17 +81,17 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: '#343a40' }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: 'rgb(var(--text-primary))' }}>
               Quick Links
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography 
-                component="a" 
-                href="/" 
+              <Typography
+                component="a"
+                href="/"
                 sx={{
-                  color: '#6c757d',
+                  color: 'rgb(var(--text-secondary))',
                   textDecoration: 'none',
-                  '&:hover': { color: '#0af' },
+                  '&:hover': { color: 'rgb(var(--primary))' },
                   transition: 'color 0.2s ease',
                   fontSize: '0.9rem'
                 }}
@@ -102,19 +103,19 @@ const Footer = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: '#343a40' }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2, color: 'rgb(var(--text-primary))' }}>
               Contact Us
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Email sx={{ color: '#6c757d', fontSize: '1.1rem' }} />
-                <Typography variant="body2" sx={{ color: '#6c757d', fontSize: '0.9rem' }}>
+                <Email sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem' }} />
+                <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.9rem' }}>
                   info@neonshowcase.com
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Phone sx={{ color: '#6c757d', fontSize: '1.1rem' }} />
-                <Typography variant="body2" sx={{ color: '#6c757d', fontSize: '0.9rem' }}>
+                <Phone sx={{ color: 'rgb(var(--text-secondary))', fontSize: '1.1rem' }} />
+                <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.9rem' }}>
                   +1 (555) 123-4567
                 </Typography>
               </Box>
@@ -122,13 +123,13 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ 
-          mt: 4, 
-          pt: 3, 
-          borderTop: '1px solid rgba(0, 0, 0, 0.05)',
-          textAlign: 'center' 
+        <Box sx={{
+          mt: 4,
+          pt: 3,
+          borderTop: '1px solid rgba(var(--border-color), 0.3)',
+          textAlign: 'center'
         }}>
-          <Typography variant="body2" sx={{ color: '#6c757d', fontSize: '0.85rem' }}>
+          <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))', fontSize: '0.85rem' }}>
             © {new Date().getFullYear()} Neon Showcase. All rights reserved.
           </Typography>
         </Box>

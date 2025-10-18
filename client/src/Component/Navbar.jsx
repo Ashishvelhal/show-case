@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  Button, 
-  Box, 
-  Container, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Container,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
   ListItemText,
   useTheme,
   useMediaQuery
@@ -18,16 +18,17 @@ import { styled } from '@mui/material/styles';
 import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ThemeDropdown from '../components/ThemeDropdown';
 
 const NeonButton = styled(Button)(({ theme, active }) => ({
-  color: active ? '#0af' : '#6c757d',
-  border: active ? '1px solid #0af' : '1px solid transparent',
-  boxShadow: active ? '0 0 5px rgba(0, 170, 255, 0.5)' : 'none',
+  color: active ? 'var(--primary)' : 'var(--text-secondary)',
+  border: active ? '1px solid var(--primary)' : '1px solid transparent',
+  boxShadow: active ? '0 0 5px var(--primary)' : 'none',
   '&:hover': {
-    backgroundColor: 'rgba(0, 170, 255, 0.05)',
-    boxShadow: '0 0 15px rgba(0, 170, 255, 0.3)',
-    color: '#0af',
-    borderColor: '#0af',
+    backgroundColor: 'var(--primary-focus)',
+    boxShadow: '0 0 15px var(--primary)',
+    color: 'var(--primary)',
+    borderColor: 'var(--primary)',
   },
   margin: '0 5px',
   fontWeight: 'bold',
@@ -135,6 +136,14 @@ const Navbar = () => {
             />
           </ListItem>
         ))}
+        <ListItem sx={{ justifyContent: 'center', mt: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography variant="body2" sx={{ color: 'text.secondary', mr: 1 }}>
+              Theme:
+            </Typography>
+            <ThemeDropdown />
+          </Box>
+        </ListItem>
       </List>
     </Box>
   );
@@ -143,11 +152,12 @@ const Navbar = () => {
     <AppBar 
       position="fixed" 
       sx={{ 
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
+        backgroundColor: 'transparent',
         backdropFilter: scrolled ? 'blur(10px)' : 'blur(8px)',
         boxShadow: scrolled ? '0 2px 20px rgba(0, 0, 0, 0.1)' : '0 1px 5px rgba(0, 0, 0, 0.05)',
         transition: 'all 0.3s ease',
-        py: scrolled ? 0.5 : 1
+        py: scrolled ? 0.5 : 1,
+        borderBottom: scrolled ? '1px solid var(--border-color)' : 'none'
       }}
     >
       <Container maxWidth="lg">
@@ -203,12 +213,12 @@ const Navbar = () => {
                   sx={{
                     ...(item.special && {
                       background: isActive(item.path) 
-                        ? 'linear-gradient(45deg, #0af 0%, #a0f 100%)' 
+                        ? 'var(--primary)' 
                         : 'transparent',
-                      color: isActive(item.path) ? 'white' : 'inherit',
+                      color: isActive(item.path) ? 'var(--primary-content)' : 'inherit',
                       '&:hover': {
-                        background: 'linear-gradient(45deg, #0af 0%, #a0f 100%)',
-                        color: 'white',
+                        background: 'var(--primary)',
+                        color: 'var(--primary-content)',
                       },
                     }),
                     mx: 0.5
@@ -217,6 +227,9 @@ const Navbar = () => {
                   {item.text}
                 </NeonButton>
               ))}
+              <Box sx={{ ml: 2 }}>
+                <ThemeDropdown />
+              </Box>
             </Box>
           )}
         </Toolbar>

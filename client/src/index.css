@@ -1,5 +1,822 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme as default */
+    --primary: 0 170 255;
+    --primary-focus: 0 170 255;
+    --primary-content: 255 255 255;
+    --secondary: 160 15 255;
+    --secondary-focus: 160 15 255;
+    --secondary-content: 255 255 255;
+    --accent: 255 21 144;
+    --accent-focus: 255 21 144;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 255 255 255;
+    --base-200: 248 249 250;
+    --base-300: 233 236 239;
+    --base-content: 33 37 41;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 229 231 235;
+    --text-primary: 33 37 41;
+    --text-secondary: 107 114 128;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="dark"] {
+    --primary: 0 170 255;
+    --primary-focus: 0 170 255;
+    --primary-content: 255 255 255;
+    --secondary: 160 15 255;
+    --secondary-focus: 160 15 255;
+    --secondary-content: 255 255 255;
+    --accent: 255 21 144;
+    --accent-focus: 255 21 144;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 33 37 41;
+    --base-100: 33 37 41;
+    --base-200: 51 65 85;
+    --base-300: 71 85 105;
+    --base-content: 255 255 255;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 71 85 105;
+    --text-primary: 255 255 255;
+    --text-secondary: 148 163 184;
+    --background: 33 37 41;
+  }
+
+  html[data-theme="cupcake"] {
+    --primary: 236 72 153;
+    --primary-focus: 236 72 153;
+    --primary-content: 255 255 255;
+    --secondary: 245 101 101;
+    --secondary-focus: 245 101 101;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 107 114 128;
+    --neutral-focus: 107 114 128;
+    --neutral-content: 255 255 255;
+    --base-100: 255 251 235;
+    --base-200: 254 243 199;
+    --base-300: 253 230 138;
+    --base-content: 31 41 55;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 253 230 138;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --background: 255 251 235;
+  }
+
+  html[data-theme="synthwave"] {
+    --primary: 168 85 247;
+    --primary-focus: 168 85 247;
+    --primary-content: 255 255 255;
+    --secondary: 236 72 153;
+    --secondary-focus: 236 72 153;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 15 23 42;
+    --base-200: 30 41 59;
+    --base-300: 51 65 85;
+    --base-content: 255 255 255;
+    --info: 59 130 246;
+    --success: 34 197 94;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 51 65 85;
+    --text-primary: 255 255 255;
+    --text-secondary: 148 163 184;
+    --background: 15 23 42;
+  }
+
+  html[data-theme="bumblebee"] {
+    --primary: 245 158 11;
+    --primary-focus: 245 158 11;
+    --primary-content: 255 255 255;
+    --secondary: 251 191 36;
+    --secondary-focus: 251 191 36;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 255 255 255;
+    --base-200: 254 240 138;
+    --base-300: 252 211 77;
+    --base-content: 31 41 55;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 252 211 77;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="emerald"] {
+    --primary: 16 185 129;
+    --primary-focus: 16 185 129;
+    --primary-content: 255 255 255;
+    --secondary: 52 211 153;
+    --secondary-focus: 52 211 153;
+    --secondary-content: 255 255 255;
+    --accent: 245 158 11;
+    --accent-focus: 245 158 11;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 236 253 245;
+    --base-200: 209 250 229;
+    --base-300: 167 243 208;
+    --base-content: 6 78 59;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 167 243 208;
+    --text-primary: 6 78 59;
+    --text-secondary: 90 124 108;
+    --background: 236 253 245;
+  }
+
+  html[data-theme="corporate"] {
+    --primary: 59 130 246;
+    --primary-focus: 59 130 246;
+    --primary-content: 255 255 255;
+    --secondary: 100 116 139;
+    --secondary-focus: 100 116 139;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 30 41 59;
+    --neutral-focus: 30 41 59;
+    --neutral-content: 255 255 255;
+    --base-100: 255 255 255;
+    --base-200: 241 245 249;
+    --base-300: 226 232 240;
+    --base-content: 51 65 85;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 226 232 240;
+    --text-primary: 51 65 85;
+    --text-secondary: 100 116 139;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="retro"] {
+    --primary: 245 101 101;
+    --primary-focus: 245 101 101;
+    --primary-content: 255 255 255;
+    --secondary: 251 146 60;
+    --secondary-focus: 251 146 60;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 254 243 199;
+    --base-200: 253 230 138;
+    --base-300: 251 191 36;
+    --base-content: 120 53 15;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 251 191 36;
+    --text-primary: 120 53 15;
+    --text-secondary: 161 98 7;
+    --background: 254 243 199;
+  }
+
+  html[data-theme="valentine"] {
+    --primary: 244 63 94;
+    --primary-focus: 244 63 94;
+    --primary-content: 255 255 255;
+    --secondary: 236 72 153;
+    --secondary-focus: 236 72 153;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 253 244 255;
+    --base-200: 250 232 255;
+    --base-300: 245 208 254;
+    --base-content: 76 5 25;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 245 208 254;
+    --text-primary: 76 5 25;
+    --text-secondary: 131 24 67;
+    --background: 253 244 255;
+  }
+
+  html[data-theme="halloween"] {
+    --primary: 251 146 60;
+    --primary-focus: 251 146 60;
+    --primary-content: 255 255 255;
+    --secondary: 245 101 101;
+    --secondary-focus: 245 101 101;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 30 25 20;
+    --base-200: 51 42 35;
+    --base-300: 76 61 51;
+    --base-content: 251 191 36;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 76 61 51;
+    --text-primary: 251 191 36;
+    --text-secondary: 217 161 25;
+    --background: 30 25 20;
+  }
+
+  html[data-theme="garden"] {
+    --primary: 34 197 94;
+    --primary-focus: 34 197 94;
+    --primary-content: 255 255 255;
+    --secondary: 52 211 153;
+    --secondary-focus: 52 211 153;
+    --secondary-content: 255 255 255;
+    --accent: 245 158 11;
+    --accent-focus: 245 158 11;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 240 253 244;
+    --base-200: 220 252 231;
+    --base-300: 187 247 208;
+    --base-content: 22 101 52;
+    --info: 59 130 246;
+    --success: 34 197 94;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 187 247 208;
+    --text-primary: 22 101 52;
+    --text-secondary: 74 135 92;
+    --background: 240 253 244;
+  }
+
+  html[data-theme="forest"] {
+    --primary: 34 197 94;
+    --primary-focus: 34 197 94;
+    --primary-content: 255 255 255;
+    --secondary: 16 185 129;
+    --secondary-focus: 16 185 129;
+    --secondary-content: 255 255 255;
+    --accent: 245 158 11;
+    --accent-focus: 245 158 11;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 239 246 255;
+    --base-200: 219 234 254;
+    --base-300: 191 219 254;
+    --base-content: 30 58 138;
+    --info: 59 130 246;
+    --success: 34 197 94;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 191 219 254;
+    --text-primary: 30 58 138;
+    --text-secondary: 71 85 105;
+    --background: 239 246 255;
+  }
+
+  html[data-theme="aqua"] {
+    --primary: 6 182 212;
+    --primary-focus: 6 182 212;
+    --primary-content: 255 255 255;
+    --secondary: 8 145 178;
+    --secondary-focus: 8 145 178;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 240 249 255;
+    --base-200: 224 242 254;
+    --base-300: 186 230 253;
+    --base-content: 8 47 73;
+    --info: 6 182 212;
+    --success: 34 197 94;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 186 230 253;
+    --text-primary: 8 47 73;
+    --text-secondary: 49 94 120;
+    --background: 240 249 255;
+  }
+
+  html[data-theme="lofi"] {
+    --primary: 139 92 246;
+    --primary-focus: 139 92 246;
+    --primary-content: 255 255 255;
+    --secondary: 168 85 247;
+    --secondary-focus: 168 85 247;
+    --secondary-content: 255 255 255;
+    --accent: 236 72 153;
+    --accent-focus: 236 72 153;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 248 250 252;
+    --base-200: 241 245 249;
+    --base-300: 229 231 235;
+    --base-content: 31 41 55;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 229 231 235;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --background: 248 250 252;
+  }
+
+  html[data-theme="pastel"] {
+    --primary: 168 85 247;
+    --primary-focus: 168 85 247;
+    --primary-content: 255 255 255;
+    --secondary: 236 72 153;
+    --secondary-focus: 236 72 153;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 254 243 199;
+    --base-200: 253 230 138;
+    --base-300: 251 191 36;
+    --base-content: 120 53 15;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 251 191 36;
+    --text-primary: 120 53 15;
+    --text-secondary: 161 98 7;
+    --background: 254 243 199;
+  }
+
+  html[data-theme="fantasy"] {
+    --primary: 168 85 247;
+    --primary-focus: 168 85 247;
+    --primary-content: 255 255 255;
+    --secondary: 139 92 246;
+    --secondary-focus: 139 92 246;
+    --secondary-content: 255 255 255;
+    --accent: 236 72 153;
+    --accent-focus: 236 72 153;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 15 23 42;
+    --base-200: 30 41 59;
+    --base-300: 51 65 85;
+    --base-content: 255 255 255;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 51 65 85;
+    --text-primary: 255 255 255;
+    --text-secondary: 148 163 184;
+    --background: 15 23 42;
+  }
+
+  html[data-theme="wireframe"] {
+    --primary: 59 130 246;
+    --primary-focus: 59 130 246;
+    --primary-content: 255 255 255;
+    --secondary: 100 116 139;
+    --secondary-focus: 100 116 139;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 229 231 235;
+    --neutral-focus: 229 231 235;
+    --neutral-content: 31 41 55;
+    --base-100: 255 255 255;
+    --base-200: 248 250 252;
+    --base-300: 241 245 249;
+    --base-content: 31 41 55;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 229 231 235;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="black"] {
+    --primary: 0 0 0;
+    --primary-focus: 0 0 0;
+    --primary-content: 255 255 255;
+    --secondary: 33 37 41;
+    --secondary-focus: 33 37 41;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 0 0 0;
+    --neutral-focus: 0 0 0;
+    --neutral-content: 255 255 255;
+    --base-100: 0 0 0;
+    --base-200: 17 24 39;
+    --base-300: 31 41 55;
+    --base-content: 255 255 255;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 31 41 55;
+    --text-primary: 255 255 255;
+    --text-secondary: 156 163 175;
+    --background: 0 0 0;
+  }
+
+  html[data-theme="luxury"] {
+    --primary: 139 92 246;
+    --primary-focus: 139 92 246;
+    --primary-content: 255 255 255;
+    --secondary: 79 70 229;
+    --secondary-focus: 79 70 229;
+    --secondary-content: 255 255 255;
+    --accent: 236 72 153;
+    --accent-focus: 236 72 153;
+    --accent-content: 255 255 255;
+    --neutral: 30 41 59;
+    --neutral-focus: 30 41 59;
+    --neutral-content: 255 255 255;
+    --base-100: 6 11 19;
+    --base-200: 15 23 42;
+    --base-300: 30 41 59;
+    --base-content: 226 232 240;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 30 41 59;
+    --text-primary: 226 232 240;
+    --text-secondary: 148 163 184;
+    --background: 6 11 19;
+  }
+
+  html[data-theme="cmyk"] {
+    --primary: 239 68 68;
+    --primary-focus: 239 68 68;
+    --primary-content: 255 255 255;
+    --secondary: 245 158 11;
+    --secondary-focus: 245 158 11;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 255 255 255;
+    --base-200: 241 245 249;
+    --base-300: 226 232 240;
+    --base-content: 31 41 55;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 226 232 240;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="autumn"] {
+    --primary: 220 38 38;
+    --primary-focus: 220 38 38;
+    --primary-content: 255 255 255;
+    --secondary: 245 101 101;
+    --secondary-focus: 245 101 101;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 254 243 199;
+    --base-200: 253 230 138;
+    --base-300: 251 191 36;
+    --base-content: 120 53 15;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 251 191 36;
+    --text-primary: 120 53 15;
+    --text-secondary: 161 98 7;
+    --background: 254 243 199;
+  }
+
+  html[data-theme="business"] {
+    --primary: 30 41 59;
+    --primary-focus: 30 41 59;
+    --primary-content: 255 255 255;
+    --secondary: 51 65 85;
+    --secondary-focus: 51 65 85;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 30 41 59;
+    --neutral-focus: 30 41 59;
+    --neutral-content: 255 255 255;
+    --base-100: 255 255 255;
+    --base-200: 241 245 249;
+    --base-300: 226 232 240;
+    --base-content: 51 65 85;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 226 232 240;
+    --text-primary: 51 65 85;
+    --text-secondary: 100 116 139;
+    --background: 255 255 255;
+  }
+
+  html[data-theme="acid"] {
+    --primary: 16 185 129;
+    --primary-focus: 16 185 129;
+    --primary-content: 255 255 255;
+    --secondary: 34 197 94;
+    --secondary-focus: 34 197 94;
+    --secondary-content: 255 255 255;
+    --accent: 245 158 11;
+    --accent-focus: 245 158 11;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 236 253 245;
+    --base-200: 209 250 229;
+    --base-300: 167 243 208;
+    --base-content: 6 78 59;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 167 243 208;
+    --text-primary: 6 78 59;
+    --text-secondary: 90 124 108;
+    --background: 236 253 245;
+  }
+
+  html[data-theme="lemonade"] {
+    --primary: 251 191 36;
+    --primary-focus: 251 191 36;
+    --primary-content: 255 255 255;
+    --secondary: 245 158 11;
+    --secondary-focus: 245 158 11;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 254 249 195;
+    --base-200: 254 240 138;
+    --base-300: 252 211 77;
+    --base-content: 120 53 15;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 252 211 77;
+    --text-primary: 120 53 15;
+    --text-secondary: 161 98 7;
+    --background: 254 249 195;
+  }
+
+  html[data-theme="night"] {
+    --primary: 30 41 59;
+    --primary-focus: 30 41 59;
+    --primary-content: 255 255 255;
+    --secondary: 51 65 85;
+    --secondary-focus: 51 65 85;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 30 41 59;
+    --neutral-focus: 30 41 59;
+    --neutral-content: 255 255 255;
+    --base-100: 30 41 59;
+    --base-200: 51 65 85;
+    --base-300: 71 85 105;
+    --base-content: 226 232 240;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 71 85 105;
+    --text-primary: 226 232 240;
+    --text-secondary: 148 163 184;
+    --background: 30 41 59;
+  }
+
+  html[data-theme="coffee"] {
+    --primary: 146 76 30;
+    --primary-focus: 146 76 30;
+    --primary-content: 255 255 255;
+    --secondary: 120 53 15;
+    --secondary-focus: 120 53 15;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 251 245 238;
+    --base-200: 245 224 193;
+    --base-300: 235 188 141;
+    --base-content: 68 39 19;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 235 188 141;
+    --text-primary: 68 39 19;
+    --text-secondary: 120 87 59;
+    --background: 251 245 238;
+  }
+
+  html[data-theme="winter"] {
+    --primary: 59 130 246;
+    --primary-focus: 59 130 246;
+    --primary-content: 255 255 255;
+    --secondary: 147 197 253;
+    --secondary-focus: 147 197 253;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 255 255 255;
+    --neutral-focus: 255 255 255;
+    --neutral-content: 0 0 0;
+    --base-100: 240 249 255;
+    --base-200: 224 242 254;
+    --base-300: 186 230 253;
+    --base-content: 8 47 73;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 186 230 253;
+    --text-primary: 8 47 73;
+    --text-secondary: 49 94 120;
+    --background: 240 249 255;
+  }
+
+  html[data-theme="dim"] {
+    --primary: 100 116 139;
+    --primary-focus: 100 116 139;
+    --primary-content: 255 255 255;
+    --secondary: 148 163 184;
+    --secondary-focus: 148 163 184;
+    --secondary-content: 255 255 255;
+    --accent: 139 92 246;
+    --accent-focus: 139 92 246;
+    --accent-content: 255 255 255;
+    --neutral: 30 41 59;
+    --neutral-focus: 30 41 59;
+    --neutral-content: 255 255 255;
+    --base-100: 17 24 39;
+    --base-200: 30 41 59;
+    --base-300: 51 65 85;
+    --base-content: 148 163 184;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 51 65 85;
+    --text-primary: 148 163 184;
+    --text-secondary: 100 116 139;
+    --background: 17 24 39;
+  }
+
+  html[data-theme="nord"] {
+    --primary: 136 58 234;
+    --primary-focus: 136 58 234;
+    --primary-content: 255 255 255;
+    --secondary: 94 234 212;
+    --secondary-focus: 94 234 212;
+    --secondary-content: 255 255 255;
+    --accent: 245 158 11;
+    --accent-focus: 245 158 11;
+    --accent-content: 255 255 255;
+    --neutral: 46 52 64;
+    --neutral-focus: 46 52 64;
+    --neutral-content: 255 255 255;
+    --base-100: 46 52 64;
+    --base-200: 59 66 82;
+    --base-300: 76 86 106;
+    --base-content: 216 222 233;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 76 86 106;
+    --text-primary: 216 222 233;
+    --text-secondary: 129 140 158;
+    --background: 46 52 64;
+  }
+
+  html[data-theme="sunset"] {
+    --primary: 251 146 60;
+    --primary-focus: 251 146 60;
+    --primary-content: 255 255 255;
+    --secondary: 244 63 94;
+    --secondary-focus: 244 63 94;
+    --secondary-content: 255 255 255;
+    --accent: 34 197 94;
+    --accent-focus: 34 197 94;
+    --accent-content: 255 255 255;
+    --neutral: 33 37 41;
+    --neutral-focus: 33 37 41;
+    --neutral-content: 255 255 255;
+    --base-100: 254 243 199;
+    --base-200: 253 230 138;
+    --base-300: 251 191 36;
+    --base-content: 120 53 15;
+    --info: 59 130 246;
+    --success: 16 185 129;
+    --warning: 245 158 11;
+    --error: 239 68 68;
+    --border-color: 251 191 36;
+    --text-primary: 120 53 15;
+    --text-secondary: 161 98 7;
+    --background: 254 243 199;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,30 +830,31 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #fff;
+  color: rgb(var(--base-content));
   line-height: 1.6;
+  background-color: rgb(var(--base-100));
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Neon text effect */
+/* Override any remaining hardcoded colors */
 .neon-text {
-  color: #fff;
+  color: rgb(var(--base-content));
   text-shadow:
-    0 0 5px #0ff,
-    0 0 10px #0ff,
-    0 0 20px #0ff,
-    0 0 40px #0ff;
+    0 0 5px rgb(var(--primary)),
+    0 0 10px rgb(var(--primary)),
+    0 0 20px rgb(var(--primary)),
+    0 0 40px rgb(var(--primary));
 }
 
-/* Glowing border effect */
 .glow-border {
   position: relative;
-  border: 1px solid #0ff;
-  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  border: 1px solid rgb(var(--primary));
+  box-shadow: 0 0 10px rgb(var(--primary)), 0 0 20px rgb(var(--primary));
   transition: all 0.3s ease;
 }
 
 .glow-border:hover {
-  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #0ff;
+  box-shadow: 0 0 20px rgb(var(--primary)), 0 0 40px rgb(var(--primary)), 0 0 60px rgb(var(--primary));
 }
 
 /* Custom scrollbar */
@@ -45,14 +863,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: rgb(var(--base-200));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ff;
+  background: rgb(var(--primary));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f0f;
+  background: rgb(var(--secondary));
 }
