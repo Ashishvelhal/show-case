@@ -1,61 +1,207 @@
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Switch, FormControlLabel } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import {
+  Box, Typography, TextField, Button, Card, CardContent, CardActions,
+  Grid, Dialog, DialogTitle, DialogContent, DialogActions, IconButton,
+  Fab, InputAdornment
+} from '@mui/material';
+import { Add, Edit, Delete, Image } from '@mui/icons-material';
 
 const Settings = () => {
-  const [settings, setSettings] = useState({
-    siteName: 'My App',
-    allowRegistration: true,
-    maintenanceMode: false,
+  const [products, setProducts] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    details: '',
+    image: ''
   });
 
+  // Fetch products from backend
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/products');
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
   const handleChange = (field) => (event) => {
-    setSettings({ ...settings, [field]: event.target.value });
+    setFormData({ ...formData, [field]: event.target.value });
   };
 
-  const handleSwitchChange = (field) => (event) => {
-    setSettings({ ...settings, [field]: event.target.checked });
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setFormData({ ...formData, image: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  const handleSave = () => {
-    // Save settings (placeholder)
-    console.log('Settings saved:', settings);
+  const handleSubmit = async () => {
+    try {
+      if (editingProduct) {
+        // Update product
+        await fetch(`http://localhost:3001/api/products/${editingProduct._id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+      } else {
+        // Create new product
+        await fetch('http://localhost:3001/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+      }
+      setOpen(false);
+      setFormData({ name: '', price: '', details: '', image: '' });
+      setEditingProduct(null);
+      fetchProducts();
+    } catch (error) {
+      console.error('Error saving product:', error);
+    }
+  };
+
+  const handleEdit = (product) => {
+    setEditingProduct(product);
+    setFormData(product);
+    setOpen(true);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/api/products/${id}`, {
+        method: 'DELETE',
+      });
+      fetchProducts();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setFormData({ name: '', price: '', details: '', image: '' });
+    setEditingProduct(null);
   };
 
   return (
-    <Box>
+    <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>
-        Settings
+        Product Management
       </Typography>
-      <TextField
-        label="Site Name"
-        value={settings.siteName}
-        onChange={handleChange('siteName')}
-        fullWidth
-        margin="normal"
-      />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={settings.allowRegistration}
-            onChange={handleSwitchChange('allowRegistration')}
+
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Grid item xs={12} sm={6} md={4} key={product._id}>
+            <Card>
+              {product.image && (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{ width: '100%', height: 200, objectFit: 'cover' }}
+                />
+              )}
+              <CardContent>
+                <Typography variant="h6">{product.name}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  ${product.price}
+                </Typography>
+                <Typography variant="body2">{product.details}</Typography>
+              </CardContent>
+              <CardActions>
+                <IconButton onClick={() => handleEdit(product)}>
+                  <Edit />
+                </IconButton>
+                <IconButton onClick={() => handleDelete(product._id)}>
+                  <Delete />
+                </IconButton>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={() => setOpen(true)}
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+      >
+        <Add />
+      </Fab>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{editingProduct ? 'Edit Product' : 'Add Product'}</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Name"
+            value={formData.name}
+            onChange={handleChange('name')}
+            fullWidth
+            margin="normal"
           />
-        }
-        label="Allow User Registration"
-      />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={settings.maintenanceMode}
-            onChange={handleSwitchChange('maintenanceMode')}
+          <TextField
+            label="Price"
+            value={formData.price}
+            onChange={handleChange('price')}
+            fullWidth
+            margin="normal"
+            type="number"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            }}
           />
-        }
-        label="Maintenance Mode"
-      />
-      <Box mt={2}>
-        <Button variant="contained" color="primary" onClick={handleSave}>
-          Save Settings
-        </Button>
-      </Box>
+          <TextField
+            label="Details"
+            value={formData.details}
+            onChange={handleChange('details')}
+            fullWidth
+            margin="normal"
+            multiline
+            rows={4}
+          />
+          <Button
+            variant="outlined"
+            component="label"
+            startIcon={<Image />}
+            fullWidth
+            sx={{ mt: 2 }}
+          >
+            Upload Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              hidden
+            />
+          </Button>
+          {formData.image && (
+            <img
+              src={formData.image}
+              alt="Preview"
+              style={{ width: '100%', marginTop: 16 }}
+            />
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit} variant="contained">
+            {editingProduct ? 'Update' : 'Add'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

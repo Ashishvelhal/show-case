@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Typography, IconButton, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { Facebook, Twitter, Instagram, GitHub, Email, Phone } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [clickCount, setClickCount] = useState(0);
+  const navigate = useNavigate();
+
+  const handleTripleClick = () => {
+    setClickCount(prev => prev + 1);
+    setTimeout(() => setClickCount(0), 500); // Reset after 500ms
+    if (clickCount >= 2) { // Triple click detected
+      navigate('/login');
+      setClickCount(0);
+    }
+  };
 
   return (
     <Box
@@ -30,8 +42,10 @@ const Footer = () => {
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
                 fontSize: { xs: '1.25rem', sm: '1.5rem' },
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+                cursor: 'pointer' // Indicate it's clickable for accessibility
               }}
+              onClick={handleTripleClick}
             >
               NEON SHOWCASE
             </Typography>
