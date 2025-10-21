@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
 import Inquiry from './pages/Inquiry';
+import Orders from './pages/Orders';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const root = createRoot(document.getElementById('root'));
@@ -30,6 +31,7 @@ root.render(
           <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
           <Route path="inquiry" element={<Inquiry />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
     </BrowserRouter>

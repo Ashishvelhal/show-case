@@ -18,6 +18,14 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    dimensions: {
+      type: String,
+      default: "",
+    },
+    materials: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

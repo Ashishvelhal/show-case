@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 import { Box, TextField, Button, Typography, Paper, Alert, Tabs, Tab, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -29,7 +30,7 @@ const Login = () => {
       }
       // API call for login
       try {
-        const response = await fetch('http://localhost:3001/api/auth/login', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.LOGIN), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
@@ -63,7 +64,7 @@ const Login = () => {
       try {
         const payload = { fullName: name, email, password, adminSecret };
         console.log('Sending signup request:', payload); // Debug log
-        const response = await fetch('http://localhost:3001/api/auth/signup', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.SIGNUP), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ fullName: name, email, password, adminSecret }),

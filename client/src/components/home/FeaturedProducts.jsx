@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { buildApiUrl, API_ENDPOINTS } from '../common/apiConfig';
 import ProductDetail from './ProductDetail';
-import img1 from '../../assets/2.jpg';
-import img2 from '../../assets/3.jpg';
-import img3 from '../../assets/4.jpg';
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 0),
@@ -37,9 +35,9 @@ const ProductCard = styled(Card)({
   flexDirection: 'column',
   height: '100%',
   width: '100%',
-  minHeight: '400px', // Consistent minimum height for all cards
-  maxWidth: '350px', // Consistent maximum width
-  margin: '0 auto', // Center cards horizontally
+  minHeight: '400px',
+  maxWidth: '350px',
+  margin: '0 auto',
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   borderRadius: '12px',
   overflow: 'hidden',
@@ -51,7 +49,7 @@ const ProductCard = styled(Card)({
 });
 
 const ProductImage = styled(CardMedia)({
-  height: 200, // Fixed height for consistency
+  height: 200,
   width: '100%',
   position: 'relative',
   '&::after': {
@@ -82,39 +80,30 @@ const ProductContent = styled(CardContent)({
   },
 });
 
-const products = [
-  {
-    id: 1,
-    name: 'Ocean Wave Resin Art',
-    price: '$149',
-    image: img1,
-  },
-  {
-    id: 2,
-    name: 'Geode Resin Coaster Set',
-    price: '$89',
-    image: img2,
-  },
-  {
-    id: 3,
-    name: 'Galaxy Resin Tray',
-    price: '$129',
-    image: img3,
-  },
-];
-
 const FeaturedProducts = () => {
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS));
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
-    // Prevent scrolling when modal is open
     document.body.style.overflow = 'hidden';
   };
 
   const handleCloseDetails = () => {
     setSelectedProduct(null);
-    // Re-enable scrolling when modal is closed
     document.body.style.overflow = 'unset';
   };
 
@@ -128,10 +117,10 @@ const FeaturedProducts = () => {
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          alignItems: 'stretch' // Ensures all cards have same height
+          alignItems: 'stretch'
         }}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={product._id} sx={{
               display: 'flex',
               minWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)', lg: 'calc(25% - 24px)' },
               maxWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)', lg: 'calc(25% - 24px)' }
@@ -157,7 +146,7 @@ const FeaturedProducts = () => {
                       fontWeight: 700,
                       fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                     }}>
-                      {product.price}
+                      ${product.price}
                     </Typography>
                   </Box>
                   <Button

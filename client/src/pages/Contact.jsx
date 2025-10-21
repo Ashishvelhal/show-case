@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 import { 
   Box, 
   Typography, 
@@ -46,7 +47,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/inquiries', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.INQUIRIES), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -102,11 +103,11 @@ const Contact = () => {
         </Box>
 
         <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
+          <Grid item size={{ xs: 12, md: 6 }}>
             <ContactCard>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
-                  <Grid item xs={12}>
+                  <Grid item size={{ xs: 12 }}>
                     <TextField
                       fullWidth
                       label="Your Name"
@@ -117,7 +118,7 @@ const Contact = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item size={{ xs: 12 }}>
                     <TextField
                       fullWidth
                       label="Email Address"
@@ -129,7 +130,7 @@ const Contact = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item size={{ xs: 12 }}>
                     <TextField
                       fullWidth
                       label="Your Message"
@@ -142,7 +143,7 @@ const Contact = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item size={{ xs: 12 }}>
                     <Button
                       type="submit"
                       variant="contained"
@@ -169,7 +170,7 @@ const Contact = () => {
               </form>
             </ContactCard>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item size={{ xs: 12, md: 6 }}>
             <ContactCard sx={{ backgroundColor: '#f8f9fa' }}>
               <Box mb={4}>
                 <Typography variant="h5" fontWeight="bold" mb={3} sx={{ fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif' }}>

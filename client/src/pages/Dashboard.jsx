@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, Drawer, List, ListItem, ListItemText, Typography, AppBar, Toolbar, IconButton, useMediaQuery, useTheme, Container, Paper, Divider, Tooltip } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon, Dashboard, People, Settings, Logout, Help, ChevronLeft, ChevronRight, Image } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, Dashboard, People, Settings, Logout, Help, ChevronLeft, ChevronRight, Image, ShoppingCart } from '@mui/icons-material';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 
 const drawerWidth = 280;
 const collapsedWidth = 70;
@@ -66,6 +67,7 @@ const SidebarContainer = () => {
     { text: 'Users', icon: <People />, path: 'users', color: '#2196f3' },
     { text: 'Photo', icon: <Image />, path: 'settings', color: '#ff9800' },
     { text: 'Inquiry', icon: <Help />, path: 'inquiry', color: '#9c27b0' },
+    { text: 'Order Products', icon: <ShoppingCart />, path: 'orders', color: '#e91e63' },
   ];
 
   const isActive = (path) => {
@@ -78,7 +80,7 @@ const SidebarContainer = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3001/api/auth/logout', {
+      await fetch(buildApiUrl(API_ENDPOINTS.AUTH.LOGOUT), {
         method: 'POST',
         credentials: 'include',
       });
@@ -167,7 +169,7 @@ const SidebarContainer = () => {
       <Box sx={{ position: 'absolute', bottom: 20, left: 20, right: 20 }}>
         <Divider sx={{ backgroundColor: 'rgba(255,255,255,0.2)', mb: 2 }} />
         <Typography variant="caption" sx={{ opacity: 0.6 }}>
-          {isCollapsed ? '2023' : '2023 Admin Dashboard'}
+          {isCollapsed ? '2025' : '2025 Admin Dashboard'}
         </Typography>
       </Box>
       {/* Toggle button */}

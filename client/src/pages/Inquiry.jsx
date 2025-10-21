@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 import { Box, Typography, List, ListItem, ListItemText, Paper, CircularProgress, Alert } from '@mui/material';
 
 const Inquiry = () => {
@@ -10,7 +11,7 @@ const Inquiry = () => {
     const fetchInquiries = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://localhost:3001/api/inquiries', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.INQUIRIES), {
           credentials: 'include', // Include cookies for auth
           headers: {
             'Authorization': `Bearer ${token}`, // Also send token in header as backup

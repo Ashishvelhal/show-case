@@ -114,7 +114,6 @@ const Navbar = () => {
       <List sx={{ flexGrow: 1 }}>
         {navItems.map((item) => (
           <ListItem 
-            button 
             key={item.text} 
             component={Link} 
             to={item.path}

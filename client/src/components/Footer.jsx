@@ -32,7 +32,7 @@ const Footer = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={3}>
-          <Grid item xs={12} md={4} sx={{ mb: { xs: 2, md: 0 } }}>
+          <Grid size={{ xs: 12, md: 4 }} sx={{ mb: { xs: 2, md: 0 } }}>
             <Typography
               variant="h6"
               sx={{
@@ -99,7 +99,7 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Typography variant="subtitle1" sx={{
               fontWeight: 600,
               mb: 2,
@@ -127,7 +127,7 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Typography variant="subtitle1" sx={{
               fontWeight: 600,
               mb: 2,

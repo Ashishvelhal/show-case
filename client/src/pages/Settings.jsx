@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 import {
   Box, Typography, TextField, Button, Card, CardContent, CardActions,
   Grid, Dialog, DialogTitle, DialogContent, DialogActions, IconButton,
@@ -14,7 +15,9 @@ const Settings = () => {
     name: '',
     price: '',
     details: '',
-    image: ''
+    image: '',
+    dimensions: '',
+    materials: ''
   });
 
   // Fetch products from backend
@@ -24,7 +27,7 @@ const Settings = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/products');
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS));
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -51,21 +54,21 @@ const Settings = () => {
     try {
       if (editingProduct) {
         // Update product
-        await fetch(`http://localhost:3001/api/products/${editingProduct._id}`, {
+        await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS) + '/' + editingProduct._id, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         });
       } else {
         // Create new product
-        await fetch('http://localhost:3001/api/products', {
+        await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         });
       }
       setOpen(false);
-      setFormData({ name: '', price: '', details: '', image: '' });
+      setFormData({ name: '', price: '', details: '', image: '', dimensions: '', materials: '' });
       setEditingProduct(null);
       fetchProducts();
     } catch (error) {
@@ -81,7 +84,7 @@ const Settings = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3001/api/products/${id}`, {
+      await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS) + '/' + id, {
         method: 'DELETE',
       });
       fetchProducts();
@@ -92,7 +95,7 @@ const Settings = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setFormData({ name: '', price: '', details: '', image: '' });
+    setFormData({ name: '', price: '', details: '', image: '', dimensions: '', materials: '' });
     setEditingProduct(null);
   };
 
@@ -104,7 +107,7 @@ const Settings = () => {
 
       <Grid container spacing={3}>
         {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product._id}>
+          <Grid item size={{ xs: 12, sm: 6, md: 4 }} key={product._id}>
             <Card>
               {product.image && (
                 <img
@@ -171,6 +174,20 @@ const Settings = () => {
             margin="normal"
             multiline
             rows={4}
+          />
+          <TextField
+            label="Dimensions"
+            value={formData.dimensions}
+            onChange={handleChange('dimensions')}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Materials"
+            value={formData.materials}
+            onChange={handleChange('materials')}
+            fullWidth
+            margin="normal"
           />
           <Button
             variant="outlined"

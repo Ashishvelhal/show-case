@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Button, Container, Grid, IconButton, Divider, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
+import CartForm from './CartForm';
 
 const DetailContainer = styled(Paper)(({ theme }) => ({
   position: 'fixed',
@@ -36,7 +37,7 @@ const ProductGrid = styled(Grid)(({ theme }) => ({
   '@media (min-width: 900px)': {
     display: 'grid',
     gridTemplateColumns: '5fr 7fr',
-    '& > div:first-child': {
+    '& > div:first-of-type': {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -65,14 +66,16 @@ const CloseButton = styled(IconButton)({
 });
 
 const ProductDetail = ({ product, onClose }) => {
+  const [showCartForm, setShowCartForm] = useState(false);
+
   if (!product) return null;
 
   // Extended product details
   const productDetails = {
     ...product,
-    description: 'This beautiful handcrafted piece is made with the highest quality materials and attention to detail. Each piece is unique and made to order.',
-    materials: 'Eco-resin, pigments, and natural elements',
-    dimensions: '12" x 12" x 1.5"',
+    description: product.details || 'This beautiful handcrafted piece is made with the highest quality materials and attention to detail. Each piece is unique and made to order.',
+    materials: product.materials || 'Eco-resin, pigments, and natural elements',
+    dimensions: product.dimensions || '12" x 12" x 1.5"',
     careInstructions: 'Dust with a soft, dry cloth. Avoid direct sunlight and extreme temperatures.',
     shippingInfo: 'Ships within 5-7 business days. Free shipping on all orders over $100.',
   };
@@ -120,7 +123,8 @@ const ProductDetail = ({ product, onClose }) => {
             <Typography variant="h5" component="h1" sx={{
               mb: 1.5,
               fontWeight: 700,
-              color: 'rgb(var(--text-primary))'
+              color: 'rgb(var(--text-primary))',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               {product.name}
             </Typography>
@@ -128,7 +132,8 @@ const ProductDetail = ({ product, onClose }) => {
             <Typography variant="h6" sx={{
               mb: 2,
               fontWeight: 700,
-              color: 'rgb(var(--primary))'
+              color: 'rgb(var(--primary))',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               {product.price}
             </Typography>
@@ -136,7 +141,8 @@ const ProductDetail = ({ product, onClose }) => {
             <Typography variant="body2" sx={{
               mb: 2,
               lineHeight: 1.6,
-              color: 'rgb(var(--text-secondary))'
+              color: 'rgb(var(--text-secondary))',
+              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               {productDetails.description}
             </Typography>
@@ -145,11 +151,15 @@ const ProductDetail = ({ product, onClose }) => {
               <Typography variant="subtitle2" sx={{
                 fontWeight: 600,
                 mb: 0.5,
-                color: 'rgb(var(--text-primary))'
+                color: 'rgb(var(--text-primary))',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 Materials:
               </Typography>
-              <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))' }}>
+              <Typography variant="body2" sx={{
+                color: 'rgb(var(--text-secondary))',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+              }}>
                 {productDetails.materials}
               </Typography>
             </Box>
@@ -158,11 +168,15 @@ const ProductDetail = ({ product, onClose }) => {
               <Typography variant="subtitle2" sx={{
                 fontWeight: 600,
                 mb: 0.5,
-                color: 'rgb(var(--text-primary))'
+                color: 'rgb(var(--text-primary))',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 Dimensions:
               </Typography>
-              <Typography variant="body2" sx={{ color: 'rgb(var(--text-secondary))' }}>
+              <Typography variant="body2" sx={{
+                color: 'rgb(var(--text-secondary))',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+              }}>
                 {productDetails.dimensions}
               </Typography>
             </Box>
@@ -177,6 +191,7 @@ const ProductDetail = ({ product, onClose }) => {
               <Button
                 variant="contained"
                 size="medium"
+                onClick={() => setShowCartForm(true)}
                 sx={{
                   background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
                   color: 'white',
@@ -189,6 +204,7 @@ const ProductDetail = ({ product, onClose }) => {
                     boxShadow: '0 4px 12px rgba(var(--primary), 0.4)',
                   },
                   transition: 'all 0.3s ease',
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Add to Cart
@@ -208,6 +224,7 @@ const ProductDetail = ({ product, onClose }) => {
                     backgroundColor: 'rgba(var(--primary), 0.05)',
                     borderColor: 'rgb(var(--primary))',
                   },
+                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Add to Wishlist
@@ -220,13 +237,32 @@ const ProductDetail = ({ product, onClose }) => {
               borderTop: '1px solid rgb(var(--border-color))',
               textAlign: 'center'
             }}>
-              <Typography variant="caption" sx={{ color: 'rgb(var(--text-secondary))' }}>
+              <Typography variant="caption" sx={{
+                color: 'rgb(var(--text-secondary))',
+                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+              }}>
                 {productDetails.shippingInfo}
               </Typography>
             </Box>
           </Grid>
         </ProductGrid>
       </DetailContent>
+
+      {/* Cart Form Modal */}
+      <CartForm
+        open={showCartForm}
+        onClose={() => setShowCartForm(false)}
+        onSubmit={async (cartData) => {
+          console.log('Cart data received:', cartData);
+          // Here you can handle the cart submission
+          // For example, send to your backend API
+          // await addToCartAPI(cartData);
+
+          // For now, just close the form
+          setShowCartForm(false);
+        }}
+        product={product}
+      />
     </DetailContainer>
   );
 };
