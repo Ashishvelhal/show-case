@@ -185,19 +185,6 @@ const Orders = () => {
   return (
     <>
       <div style={{ marginBottom: '20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <Select
-          value={selectedStatus}
-          style={{ width: 200 }}
-          onChange={(value) => setSelectedStatus(value)}
-          placeholder="Filter by Status"
-        >
-          <Option value="all">All Orders</Option>
-          <Option value="pending">Pending</Option>
-          <Option value="processing">Processing</Option>
-          <Option value="shipped">Shipped</Option>
-          <Option value="delivered">Delivered</Option>
-          <Option value="cancelled">Cancelled</Option>
-        </Select>
       </div>
 
       <Table
