@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.json({ limit: '1000mb' })); 
 app.use(cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173", //your local frontend URL
+    origin: "https://show-case-delta.vercel.app",  // your live frontend URL 
     credentials: true,
 })
 );
