@@ -11,6 +11,7 @@ import inquiryRoutes from "./routes/inquiry.route.js"
 import productRoutes from "./routes/product.route.js"
 import orderRoutes from "./routes/order.route.js"
 import usersRoutes from "./routes/users.route.js"
+import categoryRoutes from "./routes/category.route.js"
 
 dotenv.config()
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/inquiries", inquiryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/categories", categoryRoutes);
 
 
 app.listen(PORT, () =>{ 

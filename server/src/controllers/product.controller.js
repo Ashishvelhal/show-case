@@ -1,12 +1,45 @@
 import Product from "../models/product.model.js";
 
-// Get all products
+// Get all products (with optional category filter)
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const { category } = req.query;
+    let query = {};
+
+    if (category && category !== 'all') {
+      query.category = category;
+    }
+
+    const products = await Product.find(query);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: "Error fetching products", error });
+  }
+};
+
+// Get products by category
+export const getProductsByCategory = async (req, res) => {
+  try {
+    const { category } = req.params;
+    const products = await Product.find({ category: category });
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: `No products found in category: ${category}` });
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching products by category", error });
+  }
+};
+
+// Get unique categories
+export const getCategories = async (req, res) => {
+  try {
+    const categories = await Product.distinct('category');
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching categories", error });
   }
 };
 

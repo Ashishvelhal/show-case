@@ -12,6 +12,8 @@ import Users from './pages/Users';
 import Settings from './pages/Settings';
 import Inquiry from './pages/Inquiry';
 import Orders from './pages/Orders';
+import Categories from './pages/Categories';
+import ProductsByCategory from './pages/ProductsByCategory';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const root = createRoot(document.getElementById('root'));
@@ -24,11 +26,13 @@ root.render(
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="products/:category" element={<ProductsByCategory />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
           <Route index element={<div>Welcome to the Admin Dashboard! Select an option from the sidebar.</div>} />
           <Route path="users" element={<Users />} />
+          <Route path="categories" element={<Categories />} />
           <Route path="settings" element={<Settings />} />
           <Route path="inquiry" element={<Inquiry />} />
           <Route path="orders" element={<Orders />} />

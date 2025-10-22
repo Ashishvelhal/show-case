@@ -3,18 +3,20 @@ import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 import {
   Box, Typography, TextField, Button, Card, CardContent, CardActions,
   Grid, Dialog, DialogTitle, DialogContent, DialogActions, IconButton,
-  Fab, InputAdornment
+  Fab, InputAdornment, FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { Add, Edit, Delete, Image } from '@mui/icons-material';
 
 const Settings = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     price: '',
     details: '',
+    category: '',
     image: '',
     dimensions: '',
     materials: ''
@@ -23,6 +25,7 @@ const Settings = () => {
   // Fetch products from backend
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
 
   const fetchProducts = async () => {
@@ -32,6 +35,16 @@ const Settings = () => {
       setProducts(data);
     } catch (error) {
       console.error('Error fetching products:', error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.CATEGORIES_MANAGEMENT));
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
     }
   };
 
@@ -51,6 +64,12 @@ const Settings = () => {
   };
 
   const handleSubmit = async () => {
+    // Validate required fields
+    if (!formData.name || !formData.price || !formData.details || !formData.category) {
+      alert('Please fill in all required fields including category');
+      return;
+    }
+
     try {
       if (editingProduct) {
         // Update product
@@ -68,7 +87,15 @@ const Settings = () => {
         });
       }
       setOpen(false);
-      setFormData({ name: '', price: '', details: '', image: '', dimensions: '', materials: '' });
+      setFormData({
+        name: '',
+        price: '',
+        details: '',
+        category: '',
+        image: '',
+        dimensions: '',
+        materials: ''
+      });
       setEditingProduct(null);
       fetchProducts();
     } catch (error) {
@@ -95,7 +122,15 @@ const Settings = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setFormData({ name: '', price: '', details: '', image: '', dimensions: '', materials: '' });
+    setFormData({
+      name: '',
+      price: '',
+      details: '',
+      category: '',
+      image: '',
+      dimensions: '',
+      materials: ''
+    });
     setEditingProduct(null);
   };
 
@@ -104,6 +139,14 @@ const Settings = () => {
       <Typography variant="h4" gutterBottom>
         Product Management
       </Typography>
+
+      {categories.length === 0 && (
+        <Box sx={{ mb: 3, p: 2, bgcolor: 'warning.light', borderRadius: 1, color: 'warning.dark' }}>
+          <Typography variant="body1">
+            No categories available. Please go to the Categories section in the dashboard to create categories first.
+          </Typography>
+        </Box>
+      )}
 
       <Grid container spacing={3}>
         {products.map((product) => (
@@ -120,6 +163,9 @@ const Settings = () => {
                 <Typography variant="h6">{product.name}</Typography>
                 <Typography variant="body2" color="text.secondary">
                   ${product.price}
+                </Typography>
+                <Typography variant="body2" color="primary" sx={{ fontWeight: 'bold' }}>
+                  Category: {product.category || 'No category'}
                 </Typography>
                 <Typography variant="body2">{product.details}</Typography>
               </CardContent>
@@ -175,6 +221,31 @@ const Settings = () => {
             multiline
             rows={4}
           />
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Category</InputLabel>
+            <Select
+              value={formData.category}
+              onChange={handleChange('category')}
+              label="Category"
+              disabled={categories.length === 0}
+              required
+            >
+              <MenuItem value="">
+                <em>{categories.length === 0 ? 'Loading categories...' : 'Select a category'}</em>
+              </MenuItem>
+              {categories.map((category) => (
+                <MenuItem key={category._id} value={category.name}>
+                  {category.name}
+                </MenuItem>
+              ))}
+              {/* Show current category if it's not in the list (for editing existing products) */}
+              {formData.category && !categories.some(cat => cat.name === formData.category) && (
+                <MenuItem value={formData.category} disabled>
+                  {formData.category} (current)
+                </MenuItem>
+              )}
+            </Select>
+          </FormControl>
           <TextField
             label="Dimensions"
             value={formData.dimensions}

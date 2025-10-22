@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, Drawer, List, ListItem, ListItemText, Typography, AppBar, Toolbar, IconButton, useMediaQuery, useTheme, Container, Paper, Divider, Tooltip } from '@mui/material';
-import { Menu as MenuIcon, Close as CloseIcon, Dashboard, People, Settings, Logout, Help, ChevronLeft, ChevronRight, Image, ShoppingCart } from '@mui/icons-material';
+import { Menu as MenuIcon, Close as CloseIcon, Dashboard, People, Settings, Logout, Help, ChevronLeft, ChevronRight, Image, ShoppingCart, Category } from '@mui/icons-material';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { buildApiUrl, API_ENDPOINTS } from '../components/common/apiConfig';
 
@@ -65,6 +65,7 @@ const SidebarContainer = () => {
   const menuItems = [
     { text: 'Dashboard', icon: <Dashboard />, path: '', color: '#4caf50' },
     { text: 'Users', icon: <People />, path: 'users', color: '#2196f3' },
+    { text: 'Categories', icon: <Category />, path: 'categories', color: '#ff5722' },
     { text: 'Photo', icon: <Image />, path: 'settings', color: '#ff9800' },
     { text: 'Inquiry', icon: <Help />, path: 'inquiry', color: '#9c27b0' },
     { text: 'Order Products', icon: <ShoppingCart />, path: 'orders', color: '#e91e63' },

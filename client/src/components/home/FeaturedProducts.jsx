@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button, Chip } from '@mui/material';
 import { buildApiUrl, API_ENDPOINTS } from '../common/apiConfig';
 import ProductDetail from './ProductDetail';
 
@@ -29,6 +30,27 @@ const SectionTitle = styled(Typography)({
     transition: 'background 0.3s ease',
   },
 });
+
+const CategoryFilter = styled(Box)({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '0.5rem',
+  justifyContent: 'center',
+  marginBottom: '2rem',
+});
+
+const CategoryChip = styled(Chip)(({ theme, active }) => ({
+  cursor: 'pointer',
+  fontWeight: 500,
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+  transition: 'all 0.3s ease',
+  backgroundColor: active ? 'rgb(var(--primary))' : 'rgba(var(--primary), 0.1)',
+  color: active ? 'white' : 'rgb(var(--primary))',
+  '&:hover': {
+    backgroundColor: active ? 'rgb(var(--primary))' : 'rgba(var(--primary), 0.15)',
+    transform: 'translateY(-2px)',
+  },
+}));
 
 const ProductCard = styled(Card)({
   display: 'flex',
@@ -81,7 +103,11 @@ const ProductContent = styled(CardContent)({
 });
 
 const FeaturedProducts = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
@@ -90,12 +116,24 @@ const FeaturedProducts = () => {
         const response = await fetch(buildApiUrl(API_ENDPOINTS.PRODUCTS));
         const data = await response.json();
         setProducts(data);
+
+        // Extract unique categories
+        const uniqueCategories = [...new Set(data.map(product => product.category))];
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (selectedCategory === 'all') {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(products.filter(product => product.category === selectedCategory));
+    }
+  }, [products, selectedCategory]);
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
@@ -107,19 +145,52 @@ const FeaturedProducts = () => {
     document.body.style.overflow = 'unset';
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleViewCategoryProducts = (category) => {
+    navigate(`/products/${category}`);
+  };
+
+  const formatCategoryName = (category) => {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   return (
     <Section>
       <Container maxWidth="lg">
         <SectionTitle variant="h3" component="h2">
           Featured Creations
         </SectionTitle>
+
+        {/* Category Filter */}
+        <CategoryFilter>
+          <CategoryChip
+            label="All Products"
+            active={selectedCategory === 'all'}
+            onClick={() => handleCategoryClick('all')}
+          />
+          {categories.map((category) => (
+            <CategoryChip
+              key={category}
+              label={formatCategoryName(category)}
+              active={selectedCategory === category}
+              onClick={() => handleCategoryClick(category)}
+            />
+          ))}
+        </CategoryFilter>
+
         <Grid container spacing={4} sx={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
           alignItems: 'stretch'
         }}>
-          {products.map((product) => (
+          {filteredProducts.slice(0, 8).map((product) => (
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={product._id} sx={{
               display: 'flex',
               minWidth: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.333% - 21px)', lg: 'calc(25% - 24px)' },
@@ -172,25 +243,32 @@ const FeaturedProducts = () => {
         </Grid>
 
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{
-              background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
-              color: 'white',
-              px: 4,
-              py: 1.5,
-              borderRadius: '50px',
-              fontWeight: 600,
-              '&:hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: '0 5px 15px rgba(var(--primary), 0.4)',
-              },
-              transition: 'all 0.3s ease',
-            }}
-          >
-            View All Products
-          </Button>
+          {/* Category-specific buttons */}
+          {categories.slice(0, 3).map((category) => (
+            <Button
+              key={category}
+              variant="outlined"
+              size="large"
+              onClick={() => handleViewCategoryProducts(category)}
+              sx={{
+                color: 'rgb(var(--primary))',
+                borderColor: 'rgb(var(--primary))',
+                px: 3,
+                py: 1.5,
+                borderRadius: '50px',
+                fontWeight: 600,
+                ml: 2,
+                '&:hover': {
+                  backgroundColor: 'rgba(var(--primary), 0.05)',
+                  borderColor: 'rgb(var(--primary))',
+                  transform: 'translateY(-2px)',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              View {formatCategoryName(category)}
+            </Button>
+          ))}
         </Box>
       </Container>
 
