@@ -71,9 +71,10 @@ const Navbar = () => {
 
   const navItems = [
     { text: 'Home', path: '/' },
+    { text: 'Shop', path: '/shop' },
     { text: 'About', path: '/about' },
-    { 
-      text: 'Contact', 
+    {
+      text: 'Contact',
       path: '/contact',
       special: true
     }
@@ -102,7 +103,6 @@ const Navbar = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             fontWeight: 'bold',
-            fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
           }}
         >
           NEON SHOWCASE
@@ -176,7 +176,6 @@ const Navbar = () => {
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
                 fontSize: { xs: '1.5rem', sm: '1.75rem' },
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
                 '&:hover': {
                   opacity: 0.9,
                 },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 const HeroContainer = styled(Box)({
   minHeight: '90vh',
@@ -44,7 +45,6 @@ const HeroTitle = styled(Typography)(({ theme }) => ({
   fontSize: 'clamp(2.5rem, 5vw, 4rem)',
   lineHeight: 1.2,
   textAlign: 'center',
-  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
   textShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
 }));
 
@@ -56,7 +56,6 @@ const HeroSubtitle = styled(Typography)(({ theme }) => ({
   maxWidth: '600px',
   margin: '0 auto 2rem auto',
   lineHeight: 1.6,
-  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: 400,
 }));
 
@@ -107,7 +106,7 @@ const HeroSection = () => {
             Each piece is a one-of-a-kind work of art, crafted with premium materials and attention to detail.
           </HeroSubtitle>
           <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <CTAButton variant="contained" size="large">
+            <CTAButton component={Link} to="/shop" variant="contained" size="large">
               Shop Collection
             </CTAButton>
             <Button

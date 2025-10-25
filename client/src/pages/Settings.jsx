@@ -6,6 +6,7 @@ import {
   Fab, InputAdornment, FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 import { Add, Edit, Delete, Image } from '@mui/icons-material';
+import { Editor } from '@tinymce/tinymce-react';
 
 const Settings = () => {
   const [products, setProducts] = useState([]);
@@ -63,10 +64,20 @@ const Settings = () => {
     }
   };
 
+  const handleDetailsChange = (content) => {
+    setFormData({ ...formData, details: content });
+  };
+
   const handleSubmit = async () => {
     // Validate required fields
-    if (!formData.name || !formData.price || !formData.details || !formData.category) {
-      alert('Please fill in all required fields including category');
+    const stripHtml = (html) => {
+      const tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    };
+
+    if (!formData.name || !formData.price || !stripHtml(formData.details) || !formData.category) {
+      alert('Please fill in all required fields including category and product details');
       return;
     }
 
@@ -167,7 +178,17 @@ const Settings = () => {
                 <Typography variant="body2" color="primary" sx={{ fontWeight: 'bold' }}>
                   Category: {product.category || 'No category'}
                 </Typography>
-                <Typography variant="body2">{product.details}</Typography>
+                <Box
+                  sx={{
+                    mt: 1,
+                    maxHeight: '100px',
+                    overflow: 'hidden',
+                    '& p': { margin: 0, fontSize: '0.875rem' }
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: product.details || 'No details available'
+                  }}
+                />
               </CardContent>
               <CardActions>
                 <IconButton onClick={() => handleEdit(product)}>
@@ -212,15 +233,64 @@ const Settings = () => {
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
             }}
           />
-          <TextField
-            label="Details"
-            value={formData.details}
-            onChange={handleChange('details')}
-            fullWidth
-            margin="normal"
-            multiline
-            rows={4}
-          />
+          <Box sx={{ mt: 2, mb: 2 }}>
+            <Typography variant="subtitle2" gutterBottom sx={{ color: 'text.secondary' }}>
+              Product Details (Rich Text) *
+            </Typography>
+            <Box sx={{
+              '& .tox-tinymce': {
+                borderRadius: '8px',
+                border: '1px solid',
+                borderColor: 'grey.300',
+                '&:focus-within': {
+                  borderColor: 'primary.main',
+                  boxShadow: '0 0 0 2px rgba(var(--primary), 0.2)'
+                }
+              },
+              '& .tox-editor-container': {
+                backgroundColor: 'background.paper'
+              }
+            }}>
+              <Editor
+                apiKey="k4yvf0anex7554e08r3y4lfx8g8mhirok7g0ubadyfvqjvgw" // Your TinyMCE API key
+                value={formData.details}
+                onEditorChange={handleDetailsChange}
+                init={{
+                  height: 300,
+                  menubar: false,
+                  plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                    'insertdatetime', 'media', 'table', 'help', 'wordcount', 'textcolor'
+                  ],
+                  toolbar: 'undo redo | formatselect | bold italic underline strikethrough | forecolor backcolor | ' +
+                    'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | ' +
+                    'link image media | table | code preview | help',
+                  toolbar_mode: 'sliding',
+                  content_style: `
+                    body {
+                      font-family: 'Poppins', 'Orbitron', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+                      font-size: 14px;
+                      line-height: 1.6;
+                      color: rgb(var(--text-primary));
+                    }
+                    p { margin: 0 0 1em 0; }
+                    h1, h2, h3, h4, h5, h6 { margin: 1em 0 0.5em 0; color: rgb(var(--primary)); }
+                    ul, ol { margin: 0 0 1em 0; padding-left: 2em; }
+                    blockquote { border-left: 4px solid rgb(var(--primary)); padding-left: 1em; margin: 1em 0; font-style: italic; }
+                    input, textarea, select, button { font-family: 'Poppins', 'Orbitron', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; }
+                  `,
+                  placeholder: 'Enter product details, features, specifications, and descriptions...',
+                  skin: 'oxide',
+                  content_css: false,
+                  resize: 'vertical',
+                  branding: false,
+                  elementpath: false,
+                  statusbar: false,
+                }}
+              />
+            </Box>
+          </Box>
           <FormControl fullWidth margin="normal">
             <InputLabel>Category</InputLabel>
             <Select

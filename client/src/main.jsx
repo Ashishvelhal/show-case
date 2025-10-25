@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Shop from './pages/Shop';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
@@ -14,6 +15,8 @@ import Inquiry from './pages/Inquiry';
 import Orders from './pages/Orders';
 import Categories from './pages/Categories';
 import ProductsByCategory from './pages/ProductsByCategory';
+import ShopCollection from './components/shop/ShopCollection';
+import ShopByCategory from './components/shop/ShopByCategory';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const root = createRoot(document.getElementById('root'));
@@ -27,6 +30,10 @@ root.render(
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="products/:category" element={<ProductsByCategory />} />
+          <Route path="shop" element={<Shop />}>
+            <Route index element={<ShopCollection />} />
+            <Route path="category/:category" element={<ShopByCategory />} />
+          </Route>
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>

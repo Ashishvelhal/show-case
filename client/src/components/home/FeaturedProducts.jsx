@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button, Chip } from '@mui/material';
 import { buildApiUrl, API_ENDPOINTS } from '../common/apiConfig';
-import ProductDetail from './ProductDetail';
 
 const Section = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 0),
@@ -106,9 +105,8 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -136,13 +134,9 @@ const FeaturedProducts = () => {
   }, [products, selectedCategory]);
 
   const handleViewDetails = (product) => {
-    setSelectedProduct(product);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleCloseDetails = () => {
-    setSelectedProduct(null);
-    document.body.style.overflow = 'unset';
+    navigate(`/shop/category/${product.category}`, {
+      state: { selectedProduct: product }
+    });
   };
 
   const handleCategoryClick = (category) => {
@@ -150,7 +144,11 @@ const FeaturedProducts = () => {
   };
 
   const handleViewCategoryProducts = (category) => {
-    navigate(`/products/${category}`);
+    navigate(`/shop/category/${category}`);
+  };
+
+  const handleViewAllProducts = () => {
+    navigate('/shop');
   };
 
   const formatCategoryName = (category) => {
@@ -209,13 +207,11 @@ const FeaturedProducts = () => {
                       fontWeight: 600,
                       mb: 1,
                       color: 'rgb(var(--text-primary))',
-                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                     }}>
                       {product.name}
                     </Typography>
                     <Typography variant="h6" sx={{
                       fontWeight: 700,
-                      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                     }}>
                       ${product.price}
                     </Typography>
@@ -243,6 +239,29 @@ const FeaturedProducts = () => {
         </Grid>
 
         <Box sx={{ textAlign: 'center', mt: 6 }}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleViewAllProducts}
+            sx={{
+              background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
+              color: 'white',
+              px: 4,
+              py: 1.5,
+              borderRadius: '50px',
+              fontWeight: 600,
+              mb: 3,
+              mr: 2,
+              '&:hover': {
+                background: 'linear-gradient(45deg, rgb(var(--primary)) 0%, rgb(var(--secondary)) 100%)',
+                opacity: 0.9,
+                transform: 'translateY(-2px)',
+              },
+              transition: 'all 0.3s ease',
+            }}
+          >
+            View All Products
+          </Button>
           {/* Category-specific buttons */}
           {categories.slice(0, 3).map((category) => (
             <Button
@@ -258,6 +277,7 @@ const FeaturedProducts = () => {
                 borderRadius: '50px',
                 fontWeight: 600,
                 ml: 2,
+                mb: 2,
                 '&:hover': {
                   backgroundColor: 'rgba(var(--primary), 0.05)',
                   borderColor: 'rgb(var(--primary))',
@@ -271,14 +291,6 @@ const FeaturedProducts = () => {
           ))}
         </Box>
       </Container>
-
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductDetail
-          product={selectedProduct}
-          onClose={handleCloseDetails}
-        />
-      )}
     </Section>
   );
 };

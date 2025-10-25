@@ -6,7 +6,7 @@ const API_CONFIG = {
     ENDPOINTS: {
       // Add your API endpoints here
       PRODUCTS: '/api/products',
-      PRODUCTS_BY_CATEGORY: '/api/products/category',
+      PRODUCTS_BY_CATEGORY: '/api/products/category/',
       CATEGORIES: '/api/products/categories/all', // For product categories (existing)
       CATEGORIES_MANAGEMENT: '/api/categories', // For category management
       USERS: '/api/users',
@@ -27,7 +27,7 @@ const API_CONFIG = {
     ENDPOINTS: {
       // Add your API endpoints here (same as development but using production base URL)
       PRODUCTS: '/api/products',
-      PRODUCTS_BY_CATEGORY: '/api/products/category',
+      PRODUCTS_BY_CATEGORY: '/api/products/category/',
       CATEGORIES: '/api/products/categories/all', // For product categories (existing)
       CATEGORIES_MANAGEMENT: '/api/categories', // For category management
       USERS: '/api/users',

@@ -138,27 +138,43 @@ const ProductDetail = ({ product, onClose }) => {
               {product.price}
             </Typography>
 
-            <Typography variant="body2" sx={{
-              mb: 2,
-              lineHeight: 1.6,
-              color: 'rgb(var(--text-secondary))',
-              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
-            }}>
-              {productDetails.description}
-            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                mb: 2,
+                lineHeight: 1.6,
+                color: 'rgb(var(--text-secondary))',
+                '& p': { margin: '0 0 1em 0' },
+                '& h1, & h2, & h3, & h4, & h5, & h6': {
+                  color: 'rgb(var(--text-primary))',
+                  margin: '1em 0 0.5em 0'
+                },
+                '& ul, & ol': {
+                  margin: '0 0 1em 0',
+                  paddingLeft: '2em'
+                },
+                '& blockquote': {
+                  borderLeft: '4px solid rgb(var(--primary))',
+                  paddingLeft: '1em',
+                  margin: '1em 0',
+                  fontStyle: 'italic'
+                }
+              }}
+              dangerouslySetInnerHTML={{
+                __html: productDetails.description
+              }}
+            />
 
             <Box sx={{ mb: 2 }}>
               <Typography variant="subtitle2" sx={{
                 fontWeight: 600,
                 mb: 0.5,
                 color: 'rgb(var(--text-primary))',
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 Materials:
               </Typography>
               <Typography variant="body2" sx={{
                 color: 'rgb(var(--text-secondary))',
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 {productDetails.materials}
               </Typography>
@@ -169,13 +185,11 @@ const ProductDetail = ({ product, onClose }) => {
                 fontWeight: 600,
                 mb: 0.5,
                 color: 'rgb(var(--text-primary))',
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 Dimensions:
               </Typography>
               <Typography variant="body2" sx={{
                 color: 'rgb(var(--text-secondary))',
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 {productDetails.dimensions}
               </Typography>
@@ -204,7 +218,6 @@ const ProductDetail = ({ product, onClose }) => {
                     boxShadow: '0 4px 12px rgba(var(--primary), 0.4)',
                   },
                   transition: 'all 0.3s ease',
-                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Add to Cart
@@ -224,7 +237,6 @@ const ProductDetail = ({ product, onClose }) => {
                     backgroundColor: 'rgba(var(--primary), 0.05)',
                     borderColor: 'rgb(var(--primary))',
                   },
-                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Add to Wishlist
@@ -239,7 +251,6 @@ const ProductDetail = ({ product, onClose }) => {
             }}>
               <Typography variant="caption" sx={{
                 color: 'rgb(var(--text-secondary))',
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
               }}>
                 {productDetails.shippingInfo}
               </Typography>

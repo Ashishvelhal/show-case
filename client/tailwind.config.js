@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Poppins', 'Orbitron', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+        'body': ['Poppins', 'Orbitron', 'ui-sans-serif', 'system-ui'],
+        'heading': ['Poppins', 'Orbitron', 'ui-serif', 'Georgia'],
+      },
+    },
   },
   plugins: [
     require("daisyui")

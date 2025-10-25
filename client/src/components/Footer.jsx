@@ -42,7 +42,6 @@ const Footer = () => {
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 'bold',
                 fontSize: { xs: '1.25rem', sm: '1.5rem' },
-                fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
                 cursor: 'pointer' // Indicate it's clickable for accessibility
               }}
               onClick={handleTripleClick}
@@ -52,7 +51,6 @@ const Footer = () => {
             <Typography variant="body2" sx={{
               color: 'rgb(var(--text-secondary))',
               mb: 2,
-              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               Creating beautiful resin art pieces that bring life to your space.
             </Typography>
@@ -104,7 +102,6 @@ const Footer = () => {
               fontWeight: 600,
               mb: 2,
               color: 'rgb(var(--text-primary))',
-              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               Quick Links
             </Typography>
@@ -118,7 +115,6 @@ const Footer = () => {
                   '&:hover': { color: 'rgb(var(--primary))' },
                   transition: 'color 0.2s ease',
                   fontSize: '0.9rem',
-                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}
               >
                 Home
@@ -132,7 +128,6 @@ const Footer = () => {
               fontWeight: 600,
               mb: 2,
               color: 'rgb(var(--text-primary))',
-              fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
             }}>
               Contact Us
             </Typography>
@@ -142,7 +137,6 @@ const Footer = () => {
                 <Typography variant="body2" sx={{
                   color: 'rgb(var(--text-secondary))',
                   fontSize: '0.9rem',
-                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}>
                   info@neonshowcase.com
                 </Typography>
@@ -152,7 +146,6 @@ const Footer = () => {
                 <Typography variant="body2" sx={{
                   color: 'rgb(var(--text-secondary))',
                   fontSize: '0.9rem',
-                  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
                 }}>
                   +1 (555) 123-4567
                 </Typography>
@@ -170,7 +163,6 @@ const Footer = () => {
           <Typography variant="body2" sx={{
             color: 'rgb(var(--text-secondary))',
             fontSize: '0.85rem',
-            fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
           }}>
             © {new Date().getFullYear()} Neon Showcase. All rights reserved.
           </Typography>
